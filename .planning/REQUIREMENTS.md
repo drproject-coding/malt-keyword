@@ -69,31 +69,31 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status  |
 | ----------- | ----- | ------- |
-| SRCH-01     | —     | Pending |
-| SRCH-02     | —     | Pending |
-| SRCH-03     | —     | Pending |
-| SRCH-04     | —     | Pending |
-| DASH-01     | —     | Pending |
-| DASH-02     | —     | Pending |
-| DASH-03     | —     | Pending |
-| LAND-01     | —     | Pending |
-| LAND-02     | —     | Pending |
-| LAND-03     | —     | Pending |
-| LAND-04     | —     | Pending |
-| LEAD-01     | —     | Pending |
-| LEAD-02     | —     | Pending |
-| LEAD-03     | —     | Pending |
-| INFRA-01    | —     | Pending |
-| INFRA-02    | —     | Pending |
-| INFRA-03    | —     | Pending |
+| SRCH-01     | 1     | Pending |
+| SRCH-02     | 1     | Pending |
+| SRCH-03     | 1     | Pending |
+| SRCH-04     | 1     | Pending |
+| DASH-01     | 3     | Pending |
+| DASH-02     | 3     | Pending |
+| DASH-03     | 3     | Pending |
+| LAND-01     | 4     | Pending |
+| LAND-02     | 4     | Pending |
+| LAND-03     | 4     | Pending |
+| LAND-04     | 2     | Pending |
+| LEAD-01     | 2     | Pending |
+| LEAD-02     | 2     | Pending |
+| LEAD-03     | 2     | Pending |
+| INFRA-01    | 1     | Pending |
+| INFRA-02    | 1     | Pending |
+| INFRA-03    | 1     | Pending |
 
 **Coverage:**
 
 - v1 requirements: 17 total
-- Mapped to phases: 0
-- Unmapped: 17 ⚠️ (roadmap pending)
+- Mapped to phases: 17 ✓
+- Unmapped: 0 ✓
 
 ---
 
 _Requirements defined: 2026-03-22_
-_Last updated: 2026-03-22 after initial definition_
+_Last updated: 2026-03-22 after roadmap creation_
