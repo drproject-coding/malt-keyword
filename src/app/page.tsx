@@ -2,7 +2,9 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { useSearch } from "@/hooks/useSearch";
+import { useLeaderboard } from "@/hooks/useLeaderboard";
 import { Hero } from "@/components/Hero";
+import { Leaderboard } from "@/components/Leaderboard";
 import { CTAButton } from "@/components/CTAButton";
 import { SearchInput } from "@/components/SearchInput";
 import { ResultsList } from "@/components/ResultsList";
@@ -11,6 +13,8 @@ import EmailGate from "@/components/EmailGate";
 export default function Home() {
   const { query, setQuery, results, isLoading, isError, isGated, clearGate } =
     useSearch();
+  const { items: leaderboardItems, isLoading: leaderboardIsLoading } =
+    useLeaderboard();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
@@ -62,7 +66,11 @@ export default function Home() {
         {/* Hero Section */}
         <Hero />
 
-        {/* Wave 2 will add Leaderboard here */}
+        {/* Leaderboard - Social Proof */}
+        <Leaderboard
+          items={leaderboardItems}
+          isLoading={leaderboardIsLoading}
+        />
 
         {/* CTA Button */}
         <div className="px-4 sm:px-6 lg:px-8 mb-8 flex justify-center">
