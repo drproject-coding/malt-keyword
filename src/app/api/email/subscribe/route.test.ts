@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { POST } from "./route";
-import { verificationTokens, rateLimitStore } from "./route";
+import { verificationTokens, rateLimitStore } from "../token-storage";
 
 // Mock Resend
 vi.mock("resend", () => {

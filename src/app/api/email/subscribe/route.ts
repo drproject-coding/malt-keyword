@@ -1,68 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
-import { SubscribeRequest, SubscribeResponse } from "@/lib/schemas/email";
-import crypto from "crypto";
-
-// Token storage: email -> {token, createdAt, used}
-// In production, this would be a database (Prisma) or Redis
-interface VerificationToken {
-  email: string;
-  createdAt: Date;
-  used: boolean;
-}
-
-const verificationTokens = new Map<string, VerificationToken>();
-
-// Rate limit store: email -> [timestamps...]
-const rateLimitStore = new Map<string, number[]>();
-
-// Token expiry time: 24 hours
-const TOKEN_EXPIRY_MS = 24 * 60 * 60 * 1000;
-
-// Rate limit: 3 requests per email per hour
-const RATE_LIMIT_REQUESTS = 3;
-const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000; // 1 hour
-
-function isRateLimited(email: string): boolean {
-  const now = Date.now();
-  const timestamps = rateLimitStore.get(email) || [];
-
-  // Filter out timestamps older than the rate limit window
-  const recentTimestamps = timestamps.filter(
-    (ts) => now - ts < RATE_LIMIT_WINDOW_MS,
-  );
-
-  if (recentTimestamps.length >= RATE_LIMIT_REQUESTS) {
-    return true;
-  }
-
-  // Update the store with recent timestamps + current time
-  rateLimitStore.set(email, [...recentTimestamps, now]);
-  return false;
-}
-
-function generateVerificationToken(): string {
-  return crypto.randomBytes(32).toString("hex");
-}
-
-function storeVerificationToken(token: string, email: string): void {
-  verificationTokens.set(token, {
-    email,
-    createdAt: new Date(),
-    used: false,
-  });
-}
-
-function isTokenValid(token: string): boolean {
-  const record = verificationTokens.get(token);
-  if (!record) return false;
-
-  const now = new Date();
-  const age = now.getTime() - record.createdAt.getTime();
-
-  // Check expiry and usage
-  return age < TOKEN_EXPIRY_MS && !record.used;
-}
+import { SubscribeRequest } from "@/lib/schemas/email";
+import {
+  isRateLimited,
+  generateVerificationToken,
+  storeVerificationToken,
+} from "../token-storage";
 
 export async function POST(request: NextRequest) {
   try {
@@ -193,6 +136,3 @@ export async function POST(request: NextRequest) {
     );
   }
 }
-
-// Export for testing
-export { verificationTokens, rateLimitStore, isRateLimited };
