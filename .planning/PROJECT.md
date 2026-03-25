@@ -12,7 +12,7 @@ Freelancers can instantly see which keywords are worth adding to their Malt prof
 
 ### Validated
 
-(None yet — ship to validate)
+- [x] Email capture CTA to build a list for future monetization — Validated in Phase 02: email-capture-lead-gen (gate triggers on 3rd search, double opt-in via Resend, GDPR-compliant)
 
 ### Active
 
@@ -46,11 +46,13 @@ Freelancers can instantly see which keywords are worth adding to their Malt prof
 
 ## Key Decisions
 
-| Decision                          | Rationale                                                      | Outcome   |
-| --------------------------------- | -------------------------------------------------------------- | --------- |
-| Next.js + Vercel over pure static | API routes needed to proxy Malt API (CORS + potential auth)    | — Pending |
-| Live API calls, no caching        | Simplest v1; caching adds complexity                           | — Pending |
-| Email capture over paywall        | Monetization TBD; list-building is low-friction and high-value | — Pending |
+| Decision                          | Rationale                                                      | Outcome                 |
+| --------------------------------- | -------------------------------------------------------------- | ----------------------- |
+| Next.js + Vercel over pure static | API routes needed to proxy Malt API (CORS + potential auth)    | — Pending               |
+| Live API calls, no caching        | Simplest v1; caching adds complexity                           | — Pending               |
+| Email capture over paywall        | Monetization TBD; list-building is low-friction and high-value | Validated in Phase 02   |
+| Resend for transactional email    | Managed unsubscribe links, GDPR-ready, simple API              | Implemented in Phase 02 |
+| localStorage for gate state       | No backend needed for v1 count tracking; resets per browser    | Implemented in Phase 02 |
 
 ## Evolution
 
