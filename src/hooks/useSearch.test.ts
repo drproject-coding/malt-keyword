@@ -1,14 +1,40 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { renderHook, act } from "@testing-library/react";
 import { useSearch } from "./useSearch";
 
 // Mock global fetch
 global.fetch = vi.fn();
 
+// Mock localStorage
+const localStorageMock = {
+  data: {} as Record<string, string>,
+  getItem(key: string) {
+    return this.data[key] || null;
+  },
+  setItem(key: string, value: string) {
+    this.data[key] = value;
+  },
+  removeItem(key: string) {
+    delete this.data[key];
+  },
+  clear() {
+    this.data = {};
+  },
+};
+
+Object.defineProperty(window, "localStorage", {
+  value: localStorageMock,
+});
+
 describe("useSearch", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     (global.fetch as any).mockClear();
+    localStorage.clear();
+  });
+
+  afterEach(() => {
+    localStorage.clear();
   });
 
   it("debounces input by 300ms before fetching", async () => {
@@ -140,5 +166,148 @@ describe("useSearch", () => {
     expect(result.current).toHaveProperty("isError");
     expect(result.current).toHaveProperty("error");
     expect(typeof result.current.isError).toBe("boolean");
+  });
+
+  // New tests for search count and gate state
+  describe("Search Count Tracking", () => {
+    it("initializes searchCount from localStorage", () => {
+      localStorage.setItem("malt_search_count", "2");
+
+      const { result } = renderHook(() => useSearch());
+
+      expect(result.current.searchCount).toBe(2);
+    });
+
+    it("defaults searchCount to 0 when localStorage is empty", () => {
+      const { result } = renderHook(() => useSearch());
+
+      expect(result.current.searchCount).toBe(0);
+    });
+
+    it("increments searchCount after successful search", async () => {
+      vi.useFakeTimers();
+
+      const mockResponse = {
+        suggestions: [{ label: "react", volume: 156 }],
+      };
+      (global.fetch as any).mockResolvedValue({
+        ok: true,
+        json: async () => mockResponse,
+      });
+
+      const { result } = renderHook(() => useSearch());
+
+      act(() => {
+        result.current.setQuery("react");
+      });
+
+      // Advance past debounce
+      act(() => {
+        vi.advanceTimersByTime(300);
+      });
+
+      // Wait for SWR to fetch
+      await act(async () => {
+        await new Promise((resolve) => setTimeout(resolve, 50));
+      });
+
+      // searchCount should have incremented
+      expect(result.current.searchCount).toBeGreaterThanOrEqual(1);
+      expect(localStorage.getItem("malt_search_count")).toBe("1");
+
+      vi.useRealTimers();
+    });
+
+    it("does not increment searchCount on API error", async () => {
+      vi.useFakeTimers();
+
+      const mockError = new Error("API Error");
+      (global.fetch as any).mockRejectedValueOnce(mockError);
+
+      const { result } = renderHook(() => useSearch());
+
+      const initialCount = result.current.searchCount;
+
+      act(() => {
+        result.current.setQuery("react");
+      });
+
+      // Advance past debounce
+      act(() => {
+        vi.advanceTimersByTime(300);
+      });
+
+      // Count should remain unchanged
+      expect(result.current.searchCount).toBe(initialCount);
+
+      vi.useRealTimers();
+    });
+
+    it("persists searchCount in localStorage", () => {
+      const { result } = renderHook(() => useSearch());
+
+      act(() => {
+        result.current.incrementSearchCount();
+      });
+
+      expect(localStorage.getItem("malt_search_count")).toBe("1");
+
+      act(() => {
+        result.current.incrementSearchCount();
+      });
+
+      expect(localStorage.getItem("malt_search_count")).toBe("2");
+    });
+  });
+
+  describe("Gate State", () => {
+    it("initializes isUnlocked from localStorage", () => {
+      localStorage.setItem("malt_unlocked", "true");
+
+      const { result } = renderHook(() => useSearch());
+
+      // Gate should not be active when unlocked
+      expect(result.current.isGated).toBe(false);
+    });
+
+    it("returns isGated=false when searchCount < 3", () => {
+      localStorage.setItem("malt_search_count", "2");
+
+      const { result } = renderHook(() => useSearch());
+
+      expect(result.current.isGated).toBe(false);
+    });
+
+    it("returns isGated=true when searchCount >= 3 and not unlocked", () => {
+      localStorage.setItem("malt_search_count", "3");
+
+      const { result } = renderHook(() => useSearch());
+
+      expect(result.current.isGated).toBe(true);
+    });
+
+    it("returns isGated=false when searchCount >= 3 but unlocked", () => {
+      localStorage.setItem("malt_search_count", "3");
+      localStorage.setItem("malt_unlocked", "true");
+
+      const { result } = renderHook(() => useSearch());
+
+      expect(result.current.isGated).toBe(false);
+    });
+
+    it("clearGate sets malt_unlocked and makes isGated=false", () => {
+      localStorage.setItem("malt_search_count", "3");
+
+      const { result } = renderHook(() => useSearch());
+
+      expect(result.current.isGated).toBe(true);
+
+      act(() => {
+        result.current.clearGate();
+      });
+
+      expect(result.current.isGated).toBe(false);
+      expect(localStorage.getItem("malt_unlocked")).toBe("true");
+    });
   });
 });
