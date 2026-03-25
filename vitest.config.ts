@@ -6,7 +6,8 @@ export default defineConfig({
     globals: true,
     environment: "jsdom",
     setupFiles: ["./vitest.setup.ts"],
-    exclude: ["node_modules/", "tests/e2e/**/*.spec.ts"],
+    include: ["src/**/*.test.{ts,tsx}", "src/**/*.spec.{ts,tsx}"],
+    exclude: ["**/node_modules/**", "tests/e2e/**/*.spec.ts"],
     pool: "forks",
     coverage: {
       provider: "v8",
