@@ -1,0 +1,13 @@
+.git
+.gitignore
+README.md
+.planning/
+tests/
+*.test.ts
+*.test.tsx
+*.spec.ts
+.env
+.env.local
+node_modules
+.next
+.vitest
