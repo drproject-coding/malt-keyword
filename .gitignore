@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Next.js
+.next/
+dist/
+build/
+out/
+
+# Production
+.env
+.env.local
+.env.production.local
+.env.development.local
+.env.test.local
+
+# Testing
+.nyc_output/
+coverage/
+.c8/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Vitest
+.vitest/
+
+# Playwright
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+
+# Build output
+dist/
+build/
