@@ -22,7 +22,7 @@
 
 - [x] **LAND-01**: Page has a hero section with value proposition and search box visible above the fold
 - [x] **LAND-02**: Social proof block shows pre-loaded popular keywords with volume data before the user searches
-- [ ] **LAND-03**: FAQ section addresses common questions and skepticism about the tool
+- [x] **LAND-03**: FAQ section addresses common questions and skepticism about the tool
 - [ ] **LAND-04**: Email capture CTA is present on the page and triggers after user's 3rd search
 
 ### Lead Generation
@@ -78,7 +78,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DASH-03     | 3     | Pending  |
 | LAND-01     | 4     | Complete |
 | LAND-02     | 4     | Complete |
-| LAND-03     | 4     | Pending  |
+| LAND-03     | 4     | Complete |
 | LAND-04     | 2     | Complete |
 | LEAD-01     | 2     | Complete |
 | LEAD-02     | 2     | Complete |
@@ -96,4 +96,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 ---
 
 _Requirements defined: 2026-03-22_
-_Last updated: 2026-03-22 after roadmap creation_
+_Last updated: 2026-03-25 after plan 04-03 completion (LAND-03 marked complete)_
