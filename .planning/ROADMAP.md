@@ -39,7 +39,7 @@
 | Plan | Name                   | Tasks | Status   | Completed  |
 | ---- | ---------------------- | ----- | -------- | ---------- |
 | 01   | Test Infrastructure    | 4     | COMPLETE | 2026-03-25 |
-| 02   | Malt API & useSearch   | 3     | COMPLETE | 2026-03-25 |
+| 02   | Malt API & useSearch   | 3     | Complete    | 2026-03-25 |
 | 03   | UI Components & Deploy | 6     | COMPLETE | 2026-03-25 |
 
 ---
