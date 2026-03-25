@@ -119,7 +119,13 @@ export default function Home() {
           isSubmitting={isSubmitting}
         />
 
-        {/* Wave 3 will add FAQ and SuccessState here */}
+        {/* D-12: Tertiary CTA above FAQ — same component, same searchInputRef */}
+        <div className="px-4 sm:px-6 lg:px-8 mb-8 flex justify-center">
+          <CTAButton searchInputRef={searchInputRef} />
+        </div>
+
+        {/* FAQ Section */}
+        <FAQ />
       </div>
     </main>
   );
