@@ -7,10 +7,10 @@
 
 ### Search
 
-- [ ] **SRCH-01**: User can type a keyword and see live results updating as they type (debounced)
+- [x] **SRCH-01**: User can type a keyword and see live results updating as they type (debounced)
 - [ ] **SRCH-02**: Each keyword result shows how many Malt users claim that skill (volume count)
-- [ ] **SRCH-03**: Search results include 5–10 related keyword suggestions alongside the searched term
-- [ ] **SRCH-04**: Each keyword displays a competition signal (color-coded: rare / common / oversaturated)
+- [x] **SRCH-03**: Search results include 5–10 related keyword suggestions alongside the searched term
+- [x] **SRCH-04**: Each keyword displays a competition signal (color-coded: rare / common / oversaturated)
 
 ### Dashboard
 
@@ -33,8 +33,8 @@
 
 ### Infrastructure
 
-- [ ] **INFRA-01**: Next.js API route proxies all Malt autocomplete requests server-side (avoids CORS)
-- [ ] **INFRA-02**: Proxy caches responses to avoid hammering the Malt API on repeated queries
+- [x] **INFRA-01**: Next.js API route proxies all Malt autocomplete requests server-side (avoids CORS)
+- [x] **INFRA-02**: Proxy caches responses to avoid hammering the Malt API on repeated queries
 - [ ] **INFRA-03**: Application is deployed on Vercel and accessible via a public URL
 
 ## v2 Requirements
@@ -69,10 +69,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status  |
 | ----------- | ----- | ------- |
-| SRCH-01     | 1     | Pending |
+| SRCH-01     | 1     | Complete |
 | SRCH-02     | 1     | Pending |
-| SRCH-03     | 1     | Pending |
-| SRCH-04     | 1     | Pending |
+| SRCH-03     | 1     | Complete |
+| SRCH-04     | 1     | Complete |
 | DASH-01     | 3     | Pending |
 | DASH-02     | 3     | Pending |
 | DASH-03     | 3     | Pending |
@@ -83,8 +83,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | LEAD-01     | 2     | Pending |
 | LEAD-02     | 2     | Pending |
 | LEAD-03     | 2     | Pending |
-| INFRA-01    | 1     | Pending |
-| INFRA-02    | 1     | Pending |
+| INFRA-01    | 1     | Complete |
+| INFRA-02    | 1     | Complete |
 | INFRA-03    | 1     | Pending |
 
 **Coverage:**

@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { useSearch } from "@/hooks/useSearch";
 import { SearchInput } from "@/components/SearchInput";
 import { ResultsList } from "@/components/ResultsList";

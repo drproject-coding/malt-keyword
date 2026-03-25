@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { AlertCircle } from "lucide-react";
 import { KeywordCard } from "./KeywordCard";
 import type { MaltSuggestion } from "@/lib/schemas/malt";
