@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: wave_2_complete
-last_updated: "2026-03-25T06:40:00.000Z"
+status: executing
+last_updated: "2026-03-25T09:13:17.000Z"
 progress:
   total_phases: 4
   completed_phases: 1
-  total_plans: 3
-  completed_plans: 3
+  total_plans: 6
+  completed_plans: 5
 ---
 
 # STATE: Malt Keyword Tool
@@ -34,13 +34,9 @@ progress:
 
 ## Current Position
 
-Phase: 01 (Search Foundation) — ALL PLANS COMPLETE ✅
-
-- Plan 01-01 (Wave 0): Test Infrastructure ✅
-- Plan 01-02 (Wave 1): Malt API & useSearch Hook ✅
-- Plan 01-03 (Wave 2): UI Components & Deployment ✅
-
-Next: Phase 02 (Email Capture & Lead Gen)
+Phase: 02 (email-capture-lead-gen) — EXECUTING
+Plan: 2 of 3 (COMPLETED)
+Next: 02-03 (Privacy Policy & GDPR Compliance)
 
 ## Performance Metrics
 
@@ -72,6 +68,10 @@ Next: Phase 02 (Email Capture & Lead Gen)
 | HTTP cache + SWR (not Redis)      | Layer 1+2 sufficient for MVP; add Redis only if production load requires | Locked |
 | Resend for email                  | GDPR-friendly, easiest Next.js integration, no pre-ticked consent        | Locked |
 | Vercel deployment                 | API routes solve CORS + session handling elegantly                       | Locked |
+| Token storage: In-memory Map v1   | Simplicity for MVP; move to Redis/DB when scaling                        | Locked |
+| Rate limiting: 3/email/hour       | Prevents spam while allowing legitimate retries                          | Locked |
+| Token expiry: 24 hours            | Reasonable window for user to check email and click link                 | Locked |
+| Verification tokens: opaque bytes | 64-char hex, cryptographically secure, non-guessable                     | Locked |
 
 ### Todos (Pre-Phase 1 Launch)
 
@@ -97,9 +97,10 @@ Next: Phase 02 (Email Capture & Lead Gen)
 
 **Phase 2 Research:**
 
-- EU/French data protection lawyer for 2-hour review
-- Privacy policy template customization (TermsFeed/Iubenda)
-- Resend GDPR compliance verification
+- ✅ COMPLETED (02-02): Email infrastructure with Resend integration
+- EU/French data protection lawyer for 2-hour review (02-03)
+- Privacy policy template customization (TermsFeed/Iubenda) (02-03)
+- Resend GDPR compliance verification (02-03)
 
 **Phase 3 Research:**
 
@@ -116,8 +117,9 @@ Next: Phase 02 (Email Capture & Lead Gen)
 
 ## Session Continuity
 
-**Last session:** 2026-03-25T05:33:37.756Z
-**Next action:** Execute 01-02-PLAN.md (Wave 1: Malt API proxy and search hook implementation)
+**Last session:** 2026-03-25T09:13:17.000Z
+**Completed:** 02-02-PLAN.md (Email Subscription & Verification APIs)
+**Next action:** Execute 02-03-PLAN.md (Privacy Policy & GDPR Compliance)
 
 **Context preserved in:**
 
