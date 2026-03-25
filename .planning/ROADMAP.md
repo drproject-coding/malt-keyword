@@ -39,7 +39,7 @@
 | Plan | Name                   | Tasks | Status   | Completed  |
 | ---- | ---------------------- | ----- | -------- | ---------- |
 | 01   | Test Infrastructure    | 4     | COMPLETE | 2026-03-25 |
-| 02   | Malt API & useSearch   | 3     | Complete    | 2026-03-25 |
+| 02   | Malt API & useSearch   | 3     | Complete | 2026-03-25 |
 | 03   | UI Components & Deploy | 6     | COMPLETE | 2026-03-25 |
 
 ---
@@ -109,7 +109,13 @@
 5. Page is fully mobile-responsive: navigation, search box, social proof, and FAQ all render correctly on iPhone/Android without horizontal scrolling or broken layout
 6. Page loads in <2 seconds on mobile 4G and passes Core Web Vitals (LCP, FID, CLS within Google targets)
 
-**Plans:** TBD
+**Plans:** 3/3 plans created
+
+| Plan | Name                             | Wave | Tasks | Status | Created    |
+| ---- | -------------------------------- | ---- | ----- | ------ | ---------- |
+| 01   | Foundation — Hero, CTA, Sequence | 1    | 6     | PLAN   | 2026-03-25 |
+| 02   | Leaderboard — Social Proof       | 2    | 4     | PLAN   | 2026-03-25 |
+| 03   | Completion — FAQ, Success State  | 3    | 6     | PLAN   | 2026-03-25 |
 
 ---
 
@@ -120,7 +126,7 @@
 | 1. Search Foundation        | 3/3            | Complete    | 2026-03-25 |
 | 2. Email Capture & Lead Gen | 3/3 planned    | Planned     | 2026-03-25 |
 | 3. Category Dashboards      | 0/4            | Not started | —          |
-| 4. Landing Page & Brand     | 0/3            | Not started | —          |
+| 4. Landing Page & Brand     | 3/3 planned    | Planned     | 2026-03-25 |
 
 ---
 
@@ -167,3 +173,4 @@ Resend integration is independent; doesn't require Phase 3 to be complete. Phase
 
 _Roadmap created: 2026-03-22_
 _Phase 2 planned: 2026-03-25_
+_Phase 4 planned: 2026-03-25_
