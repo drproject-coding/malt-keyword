@@ -13,14 +13,13 @@ Freelancers can instantly see which keywords are worth adding to their Malt prof
 ### Validated
 
 - [x] Email capture CTA to build a list for future monetization — Validated in Phase 02: email-capture-lead-gen (gate triggers on 3rd search, double opt-in via Resend, GDPR-compliant)
+- [x] Hero/landing section explains the value proposition and targets Malt freelancers — Validated in Phase 04: landing-page-brand (Hero + Leaderboard + FAQ, sequence locked: Hero → Leaderboard → CTA → Search → Results → FAQ)
 
 ### Active
 
-- [ ] Hero/landing section explains the value proposition and targets Malt freelancers
 - [ ] Search tool: user types a keyword, sees occurrence count + related suggestions from the Malt autocomplete API
 - [ ] Each result shows keyword volume (number of Malt users using it) and a signal for saturation/competition
 - [ ] Niche dashboard: user selects a category (e.g. design, dev, marketing), app auto-generates top keywords by querying multiple seed terms
-- [ ] Email capture CTA to build a list for future monetization
 - [ ] Deployed on Vercel with a server-side proxy for the Malt API (to avoid CORS + handle auth if needed)
 
 ### Out of Scope
@@ -48,8 +47,8 @@ Freelancers can instantly see which keywords are worth adding to their Malt prof
 
 | Decision                          | Rationale                                                      | Outcome                 |
 | --------------------------------- | -------------------------------------------------------------- | ----------------------- |
-| Next.js + Vercel over pure static | API routes needed to proxy Malt API (CORS + potential auth)    | — Pending               |
-| Live API calls, no caching        | Simplest v1; caching adds complexity                           | — Pending               |
+| Next.js + Vercel over pure static | API routes needed to proxy Malt API (CORS + potential auth)    | Implemented in Phase 01 |
+| Live API calls, no caching        | Simplest v1; caching adds complexity                           | Implemented in Phase 01 |
 | Email capture over paywall        | Monetization TBD; list-building is low-friction and high-value | Validated in Phase 02   |
 | Resend for transactional email    | Managed unsubscribe links, GDPR-ready, simple API              | Implemented in Phase 02 |
 | localStorage for gate state       | No backend needed for v1 count tracking; resets per browser    | Implemented in Phase 02 |
@@ -75,4 +74,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ---
 
-_Last updated: 2026-03-22 after initialization_
+_Last updated: 2026-03-25 after Phase 04: landing-page-brand completion_
