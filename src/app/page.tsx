@@ -116,6 +116,7 @@ export default function Home() {
         <EmailGate
           isGated={isGated}
           onSubmit={handleEmailSubmit}
+          onUnlock={clearGate}
           isSubmitting={isSubmitting}
         />
 
