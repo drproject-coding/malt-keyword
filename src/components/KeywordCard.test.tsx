@@ -1,35 +1,60 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { KeywordCard } from "./KeywordCard";
+import type { MaltSuggestion } from "@/lib/schemas/malt";
 
 describe("KeywordCard", () => {
   it("renders keyword label", () => {
-    // TODO: implement in Wave 1
-    // Test that the keyword is displayed
-    expect(true).toBe(true);
+    const suggestion: MaltSuggestion = {
+      label: "React Developer",
+      volume: 45,
+    };
+    render(<KeywordCard suggestion={suggestion} />);
+    expect(screen.getByText("React Developer")).toBeInTheDocument();
   });
 
   it('displays volume count with "utilisateurs Malt" label', () => {
-    // TODO: implement in Wave 1
-    // Test that volume is formatted as "{N} utilisateurs Malt"
-    expect(true).toBe(true);
+    const suggestion: MaltSuggestion = {
+      label: "Python Developer",
+      volume: 120,
+    };
+    render(<KeywordCard suggestion={suggestion} />);
+    expect(screen.getByText("120 utilisateurs Malt")).toBeInTheDocument();
   });
 
-  it("applies green badge styles for rare competition", () => {
-    // TODO: implement in Wave 1
-    // Test that rare competition shows green color (#10B981)
-    expect(true).toBe(true);
+  it("applies correct badge for rare competition (< 10)", () => {
+    const suggestion: MaltSuggestion = {
+      label: "Niche Skill",
+      volume: 5,
+    };
+    render(<KeywordCard suggestion={suggestion} />);
+    expect(screen.getByText("Rare")).toBeInTheDocument();
   });
 
-  it("applies amber badge styles for common competition", () => {
-    // TODO: implement in Wave 1
-    // Test that common competition shows amber color (#F59E0B)
-    expect(true).toBe(true);
+  it("applies correct badge for common competition (10-100)", () => {
+    const suggestion: MaltSuggestion = {
+      label: "Common Skill",
+      volume: 50,
+    };
+    render(<KeywordCard suggestion={suggestion} />);
+    expect(screen.getByText("Common")).toBeInTheDocument();
   });
 
-  it("applies red badge styles for oversaturated competition", () => {
-    // TODO: implement in Wave 1
-    // Test that oversaturated competition shows red color (#EF4444)
-    expect(true).toBe(true);
+  it("applies correct badge for oversaturated competition (> 100)", () => {
+    const suggestion: MaltSuggestion = {
+      label: "Popular Skill",
+      volume: 500,
+    };
+    render(<KeywordCard suggestion={suggestion} />);
+    expect(screen.getByText("Saturated")).toBeInTheDocument();
+  });
+
+  it("handles missing volume gracefully", () => {
+    const suggestion: MaltSuggestion = {
+      label: "Skill Without Volume",
+    };
+    render(<KeywordCard suggestion={suggestion} />);
+    expect(screen.getByText("0 utilisateurs Malt")).toBeInTheDocument();
+    expect(screen.getByText("Rare")).toBeInTheDocument();
   });
 });
