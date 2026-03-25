@@ -1,7 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSearch } from "@/hooks/useSearch";
+import { Hero } from "@/components/Hero";
+import { CTAButton } from "@/components/CTAButton";
 import { SearchInput } from "@/components/SearchInput";
 import { ResultsList } from "@/components/ResultsList";
 import EmailGate from "@/components/EmailGate";
@@ -10,6 +12,7 @@ export default function Home() {
   const { query, setQuery, results, isLoading, isError, isGated, clearGate } =
     useSearch();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   // Check for verification token in URL params
   useEffect(() => {
@@ -54,27 +57,30 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-white to-gray-50 px-4 py-12 sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-gradient-to-br from-white to-gray-50">
       <div className="mx-auto max-w-2xl">
-        {/* Header */}
-        <div className="mb-8 text-center">
-          <h1 className="text-3xl font-bold text-gray-900 sm:text-4xl">
-            Find High-Value Keywords
-          </h1>
-          <p className="mt-2 text-gray-600">
-            Discover which keywords are worth adding to your Malt profile.
-          </p>
+        {/* Hero Section */}
+        <Hero />
+
+        {/* Wave 2 will add Leaderboard here */}
+
+        {/* CTA Button */}
+        <div className="px-4 sm:px-6 lg:px-8 mb-8 flex justify-center">
+          <CTAButton searchInputRef={searchInputRef} />
         </div>
 
         {/* Search */}
-        <SearchInput
-          value={query}
-          onChange={setQuery}
-          disabled={isLoading && !!query}
-        />
+        <div className="px-4 sm:px-6 lg:px-8">
+          <SearchInput
+            ref={searchInputRef}
+            value={query}
+            onChange={setQuery}
+            disabled={isLoading && !!query}
+          />
+        </div>
 
         {/* Results wrapper with conditional blur */}
-        <div className={isGated ? "blur-sm" : ""}>
+        <div className={`px-4 sm:px-6 lg:px-8 ${isGated ? "blur-sm" : ""}`}>
           {/* Results */}
           <ResultsList
             results={results}
@@ -90,6 +96,8 @@ export default function Home() {
           onSubmit={handleEmailSubmit}
           isSubmitting={isSubmitting}
         />
+
+        {/* Wave 3 will add FAQ and SuccessState here */}
       </div>
     </main>
   );
