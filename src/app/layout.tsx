@@ -11,12 +11,13 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Malt Keyword Tool",
+  title: "Find High-Value Keywords for Your Malt Profile — Malt Keyword Tool",
   description:
-    "Find high-value keywords for your Malt profile. See volume and competition instantly.",
+    "See which keywords are actually searched on Malt. Instantly discover rare skills that make your freelancer profile stand out with real volume data.",
   openGraph: {
-    title: "Malt Keyword Tool",
-    description: "Find high-value keywords for your Malt profile.",
+    title: "Find High-Value Keywords for Your Malt Profile — Malt Keyword Tool",
+    description:
+      "See which keywords are actually searched on Malt. Instantly discover rare skills that make your freelancer profile stand out with real volume data.",
     type: "website",
   },
 };
