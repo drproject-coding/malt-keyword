@@ -9,7 +9,7 @@
 ## Phases
 
 - [x] **Phase 1: Search Foundation** - Live keyword search with volume, competition, and related keywords (completed 2026-03-25)
-- [ ] **Phase 2: Email Capture & Lead Gen** - GDPR-compliant email gating at search #3 with privacy policy (planned 2026-03-25)
+- [x] **Phase 2: Email Capture & Lead Gen** - GDPR-compliant email gating at search #3 with privacy policy (completed 2026-03-25)
 - [ ] **Phase 3: Category Dashboards** - 5-category niche dashboard with trending badges and auto-generated top keywords
 - [ ] **Phase 4: Landing Page & Brand** - Hero section, social proof, FAQ, and mobile-responsive marketing
 
@@ -61,13 +61,13 @@
 5. One-click unsubscribe link in confirmation email works; email is immediately removed from list (Resend handles this)
 6. Users can complete exactly 2 free searches before email gate appears on 3rd attempt (conversion tracking validates this)
 
-**Plans:** 1/3 complete
+**Plans:** 3/3 complete
 
 | Plan | Name                     | Tasks | Status   | Completed  |
 | ---- | ------------------------ | ----- | -------- | ---------- |
 | 01   | Gate Trigger + UI        | 3     | COMPLETE | 2026-03-25 |
-| 02   | Email API + Verification | 3     | PLANNED  | —          |
-| 03   | Privacy Policy           | 1     | PLANNED  | —          |
+| 02   | Email API + Verification | 3     | COMPLETE | 2026-03-25 |
+| 03   | Privacy Policy           | 1     | COMPLETE | 2026-03-25 |
 
 ---
 
