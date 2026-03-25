@@ -1,6 +1,6 @@
-import { describe, it, expect, beforeEach, vi } from "vitest";
+import { describe, it, expect, beforeEach } from "vitest";
 import { GET } from "./route";
-import { verificationTokens } from "../subscribe/route";
+import { verificationTokens } from "../token-storage";
 
 describe("/api/email/verify", () => {
   beforeEach(() => {

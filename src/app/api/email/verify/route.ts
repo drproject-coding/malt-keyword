@@ -1,21 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { VerifyResponse } from "@/lib/schemas/email";
-// Import token storage from subscribe route
-import { verificationTokens } from "../subscribe/route";
-
-const TOKEN_EXPIRY_MS = 24 * 60 * 60 * 1000; // 24 hours
-
-interface VerificationToken {
-  email: string;
-  createdAt: Date;
-  used: boolean;
-}
-
-function isTokenExpired(token: VerificationToken): boolean {
-  const now = new Date();
-  const age = now.getTime() - token.createdAt.getTime();
-  return age >= TOKEN_EXPIRY_MS;
-}
+import { verificationTokens, isTokenExpired } from "../token-storage";
 
 export async function GET(request: NextRequest) {
   try {
