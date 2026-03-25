@@ -73,14 +73,15 @@ export function useSearch(initialQuery = ""): UseSearchReturn {
   // Increment search count after successful API response
   useEffect(() => {
     if (data && debouncedQuery && !error && !isLoading) {
-      // Only increment when we have valid results and no error
-      const newCount = searchCount + 1;
-      setSearchCount(newCount);
-      if (typeof window !== "undefined") {
-        localStorage.setItem("malt_search_count", newCount.toString());
-      }
+      setSearchCount((prev) => {
+        const newCount = prev + 1;
+        if (typeof window !== "undefined") {
+          localStorage.setItem("malt_search_count", newCount.toString());
+        }
+        return newCount;
+      });
     }
-  }, [data, debouncedQuery, error, isLoading, searchCount]);
+  }, [data, debouncedQuery, error, isLoading]);
 
   const incrementSearchCount = () => {
     const newCount = searchCount + 1;
