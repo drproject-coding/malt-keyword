@@ -9,7 +9,7 @@
 ## Phases
 
 - [x] **Phase 1: Search Foundation** - Live keyword search with volume, competition, and related keywords (completed 2026-03-25)
-- [ ] **Phase 2: Email Capture & Lead Gen** - GDPR-compliant email gating at search #3 with privacy policy
+- [ ] **Phase 2: Email Capture & Lead Gen** - GDPR-compliant email gating at search #3 with privacy policy (planned 2026-03-25)
 - [ ] **Phase 3: Category Dashboards** - 5-category niche dashboard with trending badges and auto-generated top keywords
 - [ ] **Phase 4: Landing Page & Brand** - Hero section, social proof, FAQ, and mobile-responsive marketing
 
@@ -61,7 +61,13 @@
 5. One-click unsubscribe link in confirmation email works; email is immediately removed from list (Resend handles this)
 6. Users can complete exactly 2 free searches before email gate appears on 3rd attempt (conversion tracking validates this)
 
-**Plans:** TBD
+**Plans:** 3/3 plans
+
+| Plan | Name                     | Tasks | Status  |
+| ---- | ------------------------ | ----- | ------- |
+| 01   | Gate Trigger + UI        | 3     | PLANNED |
+| 02   | Email API + Verification | 3     | PLANNED |
+| 03   | Privacy Policy           | 1     | PLANNED |
 
 ---
 
@@ -112,7 +118,7 @@
 | Phase                       | Plans Complete | Status      | Completed  |
 | --------------------------- | -------------- | ----------- | ---------- |
 | 1. Search Foundation        | 3/3            | Complete    | 2026-03-25 |
-| 2. Email Capture & Lead Gen | 0/4            | Not started | —          |
+| 2. Email Capture & Lead Gen | 3/3 planned    | Planned     | 2026-03-25 |
 | 3. Category Dashboards      | 0/4            | Not started | —          |
 | 4. Landing Page & Brand     | 0/3            | Not started | —          |
 
@@ -160,3 +166,4 @@ Resend integration is independent; doesn't require Phase 3 to be complete. Phase
 ---
 
 _Roadmap created: 2026-03-22_
+_Phase 2 planned: 2026-03-25_
