@@ -8,6 +8,8 @@ import { Leaderboard } from "@/components/Leaderboard";
 import { CTAButton } from "@/components/CTAButton";
 import { SearchInput } from "@/components/SearchInput";
 import { ResultsList } from "@/components/ResultsList";
+import { SuccessState } from "@/components/SuccessState";
+import { FAQ } from "@/components/FAQ";
 import EmailGate from "@/components/EmailGate";
 
 export default function Home() {
@@ -16,6 +18,7 @@ export default function Home() {
   const { items: leaderboardItems, isLoading: leaderboardIsLoading } =
     useLeaderboard();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   // Check for verification token in URL params
@@ -23,10 +26,10 @@ export default function Home() {
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
       if (params.get("verified") === "true") {
-        clearGate();
+        setShowSuccess(true);
       }
     }
-  }, [clearGate]);
+  }, []);
 
   const handleEmailSubmit = async (
     email: string,
@@ -62,6 +65,17 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-white to-gray-50">
+      {/* Success State - appears on verification */}
+      <SuccessState
+        show={showSuccess}
+        onDismiss={() => {
+          setShowSuccess(false);
+          // Clean up URL: remove ?verified=true
+          window.history.replaceState({}, "", window.location.pathname);
+          // Clear email gate
+          clearGate();
+        }}
+      />
       <div className="mx-auto max-w-2xl">
         {/* Hero Section */}
         <Hero />
