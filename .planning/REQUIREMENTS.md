@@ -8,7 +8,7 @@
 ### Search
 
 - [x] **SRCH-01**: User can type a keyword and see live results updating as they type (debounced)
-- [ ] **SRCH-02**: Each keyword result shows how many Malt users claim that skill (volume count)
+- [x] **SRCH-02**: Each keyword result shows how many Malt users claim that skill (volume count)
 - [x] **SRCH-03**: Search results include 5–10 related keyword suggestions alongside the searched term
 - [x] **SRCH-04**: Each keyword displays a competition signal (color-coded: rare / common / oversaturated)
 
@@ -35,7 +35,7 @@
 
 - [x] **INFRA-01**: Next.js API route proxies all Malt autocomplete requests server-side (avoids CORS)
 - [x] **INFRA-02**: Proxy caches responses to avoid hammering the Malt API on repeated queries
-- [ ] **INFRA-03**: Application is deployed on Vercel and accessible via a public URL
+- [x] **INFRA-03**: Application is deployed on Vercel and accessible via a public URL
 
 ## v2 Requirements
 
@@ -70,7 +70,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | Requirement | Phase | Status  |
 | ----------- | ----- | ------- |
 | SRCH-01     | 1     | Complete |
-| SRCH-02     | 1     | Pending |
+| SRCH-02     | 1     | Complete |
 | SRCH-03     | 1     | Complete |
 | SRCH-04     | 1     | Complete |
 | DASH-01     | 3     | Pending |
@@ -85,7 +85,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | LEAD-03     | 2     | Pending |
 | INFRA-01    | 1     | Complete |
 | INFRA-02    | 1     | Complete |
-| INFRA-03    | 1     | Pending |
+| INFRA-03    | 1     | Complete |
 
 **Coverage:**
 
