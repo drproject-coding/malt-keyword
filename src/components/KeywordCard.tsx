@@ -13,7 +13,7 @@ interface KeywordCardProps {
 }
 
 export function KeywordCard({ suggestion }: KeywordCardProps) {
-  const volume = suggestion.volume ?? 0;
+  const volume = suggestion.occurrences ?? 0;
   const level = getCompetitionLevel(volume);
   const badgeColor = getCompetitionColor(level);
   const label = getCompetitionLabel(level);

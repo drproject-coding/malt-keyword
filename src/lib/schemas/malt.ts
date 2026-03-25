@@ -6,8 +6,18 @@ export const MaltAutocompleteRequestSchema = z.object({
 
 export const MaltSuggestionSchema = z.object({
   label: z.string(),
-  volume: z.number().optional(),
+  occurrences: z.number().optional(),
 });
+
+// Raw array format returned by the Malt API
+const MaltRawSuggestionSchema = z.object({
+  label: z.string(),
+  occurrences: z.number().optional(),
+  universe: z.string().optional(),
+  tag: z.unknown().nullable().optional(),
+});
+
+export const MaltAutocompleteRawSchema = z.array(MaltRawSuggestionSchema);
 
 export const MaltAutocompleteResponseSchema = z.object({
   suggestions: z.array(MaltSuggestionSchema),

@@ -4,7 +4,11 @@ import { useState, useEffect } from "react";
 import useSWR from "swr";
 import { MaltAutocompleteResponse } from "@/lib/schemas/malt";
 
-const fetcher = (url: string) => fetch(url).then((r) => r.json());
+const fetcher = (url: string) =>
+  fetch(url).then((r) => {
+    if (!r.ok) throw new Error("Search failed");
+    return r.json();
+  });
 
 export function useSearch(initialQuery = "") {
   const [query, setQuery] = useState(initialQuery);

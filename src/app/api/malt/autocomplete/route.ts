@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
   MaltAutocompleteRequestSchema,
-  MaltAutocompleteResponseSchema,
+  MaltAutocompleteRawSchema,
 } from "@/lib/schemas/malt";
 
 const MALT_API_URL =
@@ -30,11 +30,16 @@ export async function GET(request: NextRequest) {
     const maltUrl = new URL(MALT_API_URL);
     maltUrl.searchParams.set("query", validatedInput.q);
 
+    // Forward browser cookies so Cloudflare lets the request through
+    const cookieHeader = request.headers.get("cookie") ?? "";
+
     // Fetch from Malt with timeout
     const maltResponse = await fetch(maltUrl.toString(), {
       method: "GET",
       headers: {
-        "User-Agent": "Mozilla/5.0 (Malt Keyword Tool)", // Malt may require User-Agent
+        "User-Agent": request.headers.get("user-agent") ?? "Mozilla/5.0",
+        ...(cookieHeader && { Cookie: cookieHeader }),
+        Accept: "application/json",
       },
       signal: AbortSignal.timeout(UPSTREAM_TIMEOUT),
     });
@@ -51,8 +56,14 @@ export async function GET(request: NextRequest) {
 
     const data = await maltResponse.json();
 
-    // Validate response shape
-    const validated = MaltAutocompleteResponseSchema.parse(data);
+    // Malt returns a raw array; validate and wrap into our response shape
+    const rawSuggestions = MaltAutocompleteRawSchema.parse(data);
+    const validated = {
+      suggestions: rawSuggestions.map(({ label, occurrences }) => ({
+        label,
+        occurrences,
+      })),
+    };
 
     // Return with cache headers (INFRA-02)
     return NextResponse.json(validated, {
