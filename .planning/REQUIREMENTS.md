@@ -27,9 +27,9 @@
 
 ### Lead Generation
 
-- [ ] **LEAD-01**: Email capture form gates full results after the user's 3rd search
-- [ ] **LEAD-02**: Email form includes a GDPR-compliant consent checkbox with explicit opt-in language
-- [ ] **LEAD-03**: A basic privacy policy page exists at /privacy explaining data usage
+- [x] **LEAD-01**: Email capture form gates full results after the user's 3rd search
+- [x] **LEAD-02**: Email form includes a GDPR-compliant consent checkbox with explicit opt-in language
+- [x] **LEAD-03**: A basic privacy policy page exists at /privacy explaining data usage
 
 ### Infrastructure
 
@@ -67,22 +67,22 @@
 
 Which phases cover which requirements. Updated during roadmap creation.
 
-| Requirement | Phase | Status  |
-| ----------- | ----- | ------- |
+| Requirement | Phase | Status   |
+| ----------- | ----- | -------- |
 | SRCH-01     | 1     | Complete |
 | SRCH-02     | 1     | Complete |
 | SRCH-03     | 1     | Complete |
 | SRCH-04     | 1     | Complete |
-| DASH-01     | 3     | Pending |
-| DASH-02     | 3     | Pending |
-| DASH-03     | 3     | Pending |
-| LAND-01     | 4     | Pending |
-| LAND-02     | 4     | Pending |
-| LAND-03     | 4     | Pending |
-| LAND-04     | 2     | Pending |
-| LEAD-01     | 2     | Pending |
-| LEAD-02     | 2     | Pending |
-| LEAD-03     | 2     | Pending |
+| DASH-01     | 3     | Pending  |
+| DASH-02     | 3     | Pending  |
+| DASH-03     | 3     | Pending  |
+| LAND-01     | 4     | Pending  |
+| LAND-02     | 4     | Pending  |
+| LAND-03     | 4     | Pending  |
+| LAND-04     | 2     | Complete |
+| LEAD-01     | 2     | Complete |
+| LEAD-02     | 2     | Complete |
+| LEAD-03     | 2     | Complete |
 | INFRA-01    | 1     | Complete |
 | INFRA-02    | 1     | Complete |
 | INFRA-03    | 1     | Complete |
