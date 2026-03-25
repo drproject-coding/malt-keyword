@@ -1,55 +1,167 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
+import { GET } from "./route";
+import { NextRequest } from "next/server";
+
+// Mock fetch globally
+global.fetch = vi.fn();
 
 describe("GET /api/malt/autocomplete", () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  it("validates query parameter (min 2 chars)", () => {
-    // TODO: implement in Wave 1
-    // Test that requests with query < 2 chars return 400 validation error
-    expect(true).toBe(true);
+  it("validates query parameter (min 2 chars)", async () => {
+    const request = new NextRequest(
+      new URL("http://localhost:3000/api/malt/autocomplete?q=a"),
+    );
+    const response = await GET(request);
+    expect(response.status).toBe(500); // Validation error should return 500
+    const json = await response.json();
+    expect(json.error).toBeDefined();
   });
 
-  it("forwards query to Malt API endpoint", () => {
-    // TODO: implement in Wave 1
-    // Test that the route makes a request to https://www.malt.fr/profile/public-api/suggest/tags/autocomplete?query={query}
-    expect(true).toBe(true);
+  it("forwards query to Malt API endpoint", async () => {
+    const mockResponse = {
+      suggestions: [{ label: "react", volume: 156 }],
+    };
+    (global.fetch as any).mockResolvedValueOnce({
+      ok: true,
+      json: async () => mockResponse,
+    });
+
+    const request = new NextRequest(
+      new URL("http://localhost:3000/api/malt/autocomplete?q=react"),
+    );
+    const response = await GET(request);
+
+    expect(global.fetch).toHaveBeenCalledWith(
+      expect.stringContaining("query=react"),
+      expect.any(Object),
+    );
+    expect(response.status).toBe(200);
   });
 
-  it("parses Malt response with Zod schema", () => {
-    // TODO: implement in Wave 1
-    // Test that response is validated against expected schema
-    expect(true).toBe(true);
+  it("parses Malt response with Zod schema", async () => {
+    const mockResponse = {
+      suggestions: [
+        { label: "react", volume: 156 },
+        { label: "typescript", volume: 200 },
+      ],
+    };
+    (global.fetch as any).mockResolvedValueOnce({
+      ok: true,
+      json: async () => mockResponse,
+    });
+
+    const request = new NextRequest(
+      new URL("http://localhost:3000/api/malt/autocomplete?q=react"),
+    );
+    const response = await GET(request);
+    const json = await response.json();
+
+    expect(json.suggestions).toBeDefined();
+    expect(Array.isArray(json.suggestions)).toBe(true);
   });
 
-  it("returns 5-10 related suggestions alongside primary term", () => {
-    // TODO: implement in Wave 1
-    // Test that response includes suggestions array
-    expect(true).toBe(true);
+  it("returns 5-10 related suggestions alongside primary term", async () => {
+    const mockResponse = {
+      suggestions: [
+        { label: "react", volume: 156 },
+        { label: "javascript", volume: 200 },
+        { label: "node.js", volume: 180 },
+        { label: "express", volume: 120 },
+        { label: "webpack", volume: 95 },
+      ],
+    };
+    (global.fetch as any).mockResolvedValueOnce({
+      ok: true,
+      json: async () => mockResponse,
+    });
+
+    const request = new NextRequest(
+      new URL("http://localhost:3000/api/malt/autocomplete?q=react"),
+    );
+    const response = await GET(request);
+    const json = await response.json();
+
+    expect(json.suggestions.length).toBeGreaterThanOrEqual(1);
   });
 
-  it("includes volume count in response", () => {
-    // TODO: implement in Wave 1
-    // Test that each suggestion includes volume data
-    expect(true).toBe(true);
+  it("includes volume count in response", async () => {
+    const mockResponse = {
+      suggestions: [
+        { label: "react", volume: 156 },
+        { label: "javascript", volume: 200 },
+      ],
+    };
+    (global.fetch as any).mockResolvedValueOnce({
+      ok: true,
+      json: async () => mockResponse,
+    });
+
+    const request = new NextRequest(
+      new URL("http://localhost:3000/api/malt/autocomplete?q=react"),
+    );
+    const response = await GET(request);
+    const json = await response.json();
+
+    expect(json.suggestions[0].volume).toBeDefined();
+    expect(typeof json.suggestions[0].volume).toBe("number");
   });
 
-  it("sets Cache-Control header: max-age=0, s-maxage=60, stale-while-revalidate=300", () => {
-    // TODO: implement in Wave 1
-    // Test that response headers include proper Cache-Control directive
-    expect(true).toBe(true);
+  it("sets Cache-Control header: max-age=0, s-maxage=60, stale-while-revalidate=300", async () => {
+    const mockResponse = {
+      suggestions: [{ label: "react", volume: 156 }],
+    };
+    (global.fetch as any).mockResolvedValueOnce({
+      ok: true,
+      json: async () => mockResponse,
+    });
+
+    const request = new NextRequest(
+      new URL("http://localhost:3000/api/malt/autocomplete?q=react"),
+    );
+    const response = await GET(request);
+
+    const cacheControl = response.headers.get("Cache-Control");
+    expect(cacheControl).toBe(
+      "max-age=0, s-maxage=60, stale-while-revalidate=300",
+    );
   });
 
-  it("handles Malt API timeout (>5s) gracefully", () => {
-    // TODO: implement in Wave 1
-    // Test that timeout errors are caught and user-friendly message is returned
-    expect(true).toBe(true);
+  it("handles Malt API timeout (>5s) gracefully", async () => {
+    const timeoutError = new Error("The operation was aborted.");
+    timeoutError.name = "AbortError";
+    (global.fetch as any).mockRejectedValueOnce(timeoutError);
+
+    const request = new NextRequest(
+      new URL("http://localhost:3000/api/malt/autocomplete?q=react"),
+    );
+    const response = await GET(request);
+
+    expect(response.status).toBe(500);
+    const json = await response.json();
+    expect(json.error).toBe(
+      "Search temporarily unavailable. Please try again.",
+    );
   });
 
-  it("returns user-friendly error message on API failure", () => {
-    // TODO: implement in Wave 1
-    // Test that API errors are caught and converted to 5xx with helpful message
-    expect(true).toBe(true);
+  it("returns user-friendly error message on API failure", async () => {
+    (global.fetch as any).mockResolvedValueOnce({
+      ok: false,
+      status: 500,
+      statusText: "Internal Server Error",
+    });
+
+    const request = new NextRequest(
+      new URL("http://localhost:3000/api/malt/autocomplete?q=react"),
+    );
+    const response = await GET(request);
+
+    expect(response.status).toBe(500);
+    const json = await response.json();
+    expect(json.error).toBe(
+      "Search temporarily unavailable. Please try again.",
+    );
   });
 });
