@@ -65,8 +65,14 @@ export default function Home() {
       />
 
       <div className="mx-auto max-w-2xl">
-        {/* Pre-search: hero + leaderboard + CTA */}
-        {!hasQuery && (
+        {/* Hero block: compact brand header during search, full hero pre-search */}
+        {hasQuery ? (
+          <div className="px-4 sm:px-6 mb-6 pt-8">
+            <p className="text-xs font-medium tracking-widest uppercase text-neutral-600">
+              Malt Keyword Intel
+            </p>
+          </div>
+        ) : (
           <>
             <Hero />
             <Leaderboard
@@ -81,12 +87,7 @@ export default function Home() {
 
         {/* Search input — always visible */}
         <div className="px-4 sm:px-6 lg:px-8">
-          <SearchInput
-            ref={searchInputRef}
-            value={query}
-            onChange={setQuery}
-            disabled={isLoading && !!query}
-          />
+          <SearchInput ref={searchInputRef} value={query} onChange={setQuery} />
         </div>
 
         {/* Post-search dashboard */}
@@ -110,11 +111,15 @@ export default function Home() {
           isSubmitting={isSubmitting}
         />
 
-        {/* Secondary CTA + FAQ */}
-        <div className="px-4 sm:px-6 lg:px-8 mt-16 mb-8 flex justify-center">
-          <CTAButton searchInputRef={searchInputRef} />
-        </div>
-        <FAQ />
+        {/* Secondary CTA + FAQ — hidden during search */}
+        {!hasQuery && (
+          <>
+            <div className="px-4 sm:px-6 lg:px-8 mt-16 mb-8 flex justify-center">
+              <CTAButton searchInputRef={searchInputRef} />
+            </div>
+            <FAQ />
+          </>
+        )}
       </div>
     </main>
   );

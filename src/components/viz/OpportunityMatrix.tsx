@@ -47,7 +47,7 @@ function CustomDot(props: any) {
         y={cy - 12}
         textAnchor="middle"
         fontSize={10}
-        fill="#374151"
+        fill="#a3a3a3"
         className="pointer-events-none"
       >
         {payload.label.length > 16
@@ -63,12 +63,12 @@ function CustomTooltip({ active, payload }: any) {
   if (!active || !payload?.length) return null;
   const d: DataPoint = payload[0].payload;
   return (
-    <div className="bg-white border border-gray-200 rounded-lg px-3 py-2 shadow text-sm">
-      <p className="font-semibold text-gray-900">{d.label}</p>
-      <p className="text-gray-500">
+    <div className="bg-[#111] border border-white/10 rounded-lg px-3 py-2 text-sm">
+      <p className="font-semibold text-white">{d.label}</p>
+      <p className="text-neutral-400">
         {d.occurrences.toLocaleString("fr-FR")} freelancers
       </p>
-      <p className="text-gray-500">
+      <p className="text-neutral-400">
         {d.y} {d.y === 1 ? "word" : "words"}
       </p>
     </div>
@@ -109,9 +109,9 @@ export function OpportunityMatrix({ results }: Props) {
           Saturated — avoid
         </span>
       </div>
-      <ResponsiveContainer width="100%" height={320}>
+      <ResponsiveContainer width="100%" height={420}>
         <ScatterChart margin={{ top: 20, right: 20, bottom: 40, left: 40 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" />
+          <CartesianGrid strokeDasharray="3 3" stroke="#262626" />
           <XAxis
             type="number"
             dataKey="x"
@@ -150,13 +150,13 @@ export function OpportunityMatrix({ results }: Props) {
           <Tooltip content={<CustomTooltip />} />
           <ReferenceLine
             x={QUADRANT_X}
-            stroke="#e5e7eb"
+            stroke="#404040"
             strokeDasharray="6 3"
             strokeWidth={1.5}
           />
           <ReferenceLine
             y={QUADRANT_Y}
-            stroke="#e5e7eb"
+            stroke="#404040"
             strokeDasharray="6 3"
             strokeWidth={1.5}
           />

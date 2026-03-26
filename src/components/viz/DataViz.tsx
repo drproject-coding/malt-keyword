@@ -49,17 +49,17 @@ export function DataViz({ results, query }: Props) {
   const active = TABS.find((t) => t.id === activeTab)!;
 
   return (
-    <div className="mt-8 rounded-2xl border border-gray-100 bg-white shadow-sm overflow-hidden">
+    <div className="mt-8 rounded-2xl border border-white/10 bg-[#111] overflow-hidden">
       {/* Tab bar */}
-      <div className="flex border-b border-gray-100 overflow-x-auto">
+      <div className="flex border-b border-white/10 overflow-x-auto">
         {TABS.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={`flex-shrink-0 px-5 py-3.5 text-sm font-medium transition-colors focus:outline-none ${
               activeTab === tab.id
-                ? "text-black border-b-2 border-black -mb-px"
-                : "text-neutral-400 hover:text-neutral-700"
+                ? "text-white border-b-2 border-white -mb-px"
+                : "text-neutral-500 hover:text-neutral-300"
             }`}
           >
             {tab.label}
@@ -70,9 +70,7 @@ export function DataViz({ results, query }: Props) {
       {/* Content */}
       <div className="p-6">
         <div className="mb-5">
-          <h3 className="text-base font-semibold text-gray-900">
-            {active.title}
-          </h3>
+          <h3 className="text-base font-semibold text-white">{active.title}</h3>
           <p className="text-xs text-neutral-400 mt-0.5">{active.desc}</p>
         </div>
 

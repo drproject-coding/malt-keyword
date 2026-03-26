@@ -70,7 +70,7 @@ export function ProfileIntelligence({ query }: Props) {
     return profiles.filter((p) => {
       if (
         filters.locationType !== "all" &&
-        p.location?.locationType !== filters.locationType
+        (p.location?.locationType ?? "").toUpperCase() !== filters.locationType
       )
         return false;
       if (filters.availableOnly) {
@@ -166,17 +166,21 @@ export function ProfileIntelligence({ query }: Props) {
           Available now
         </button>
 
-        <button
-          onClick={() => setTestMode((v) => !v)}
-          className={`px-3 py-1 text-xs rounded-full border transition-colors ml-auto ${
-            testMode
-              ? "border-yellow-500 text-yellow-400 bg-yellow-500/10"
-              : "border-neutral-700 text-neutral-500 hover:border-neutral-500"
-          }`}
-          title="Fetch 1 page instead of 3 to avoid flooding the API"
-        >
-          {testMode ? "Test mode: 1 page" : "Test mode"}
-        </button>
+        <div className="relative group ml-auto">
+          <button
+            onClick={() => setTestMode((v) => !v)}
+            className={`px-3 py-1 text-xs rounded-full border transition-colors ${
+              testMode
+                ? "border-yellow-500 text-yellow-400 bg-yellow-500/10"
+                : "border-neutral-700 text-neutral-500 hover:border-neutral-500"
+            }`}
+          >
+            {testMode ? "Test mode: 1 page" : "Test mode"}
+          </button>
+          <div className="absolute bottom-full mb-1.5 left-1/2 -translate-x-1/2 hidden group-hover:block bg-neutral-900 border border-white/10 text-neutral-400 text-xs rounded px-2 py-1 whitespace-nowrap pointer-events-none z-10">
+            Fetch 1 page instead of 3 to avoid flooding the API
+          </div>
+        </div>
 
         {filtered.length !== profiles.length && (
           <span className="text-xs text-neutral-600">

@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#6366F1",
+  themeColor: "#0a0a0a",
 };
 
 export const metadata: Metadata = {
@@ -29,7 +29,19 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <nav className="sticky top-0 z-50 border-b border-white/5 bg-[#0a0a0a]/95 backdrop-blur-sm">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 h-12 flex items-center">
+            <a
+              href="/"
+              className="text-sm font-black text-white tracking-tight"
+            >
+              MALT KEYWORD
+            </a>
+          </div>
+        </nav>
+        {children}
+      </body>
     </html>
   );
 }
