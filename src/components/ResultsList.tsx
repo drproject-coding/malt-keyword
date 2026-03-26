@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { AlertCircle } from "lucide-react";
 import { KeywordCard } from "./KeywordCard";
 import type { MaltSuggestion } from "@/lib/schemas/malt";
 
@@ -20,25 +19,21 @@ export function ResultsList({
 }: ResultsListProps) {
   if (isError) {
     return (
-      <div className="mt-4 rounded-lg border border-red-200 bg-red-50 p-4 flex items-start gap-3">
-        <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
-        <div className="flex-1">
-          <h3 className="font-semibold text-red-900">
-            Search temporarily unavailable
-          </h3>
-          <p className="text-sm text-red-800">Please try again.</p>
-        </div>
+      <div className="mt-4">
+        <p className="text-sm text-red-400">
+          Search temporarily unavailable — please try again.
+        </p>
       </div>
     );
   }
 
   if (isLoading && query) {
     return (
-      <div className="mt-4 space-y-3">
+      <div className="mt-4 space-y-2">
         {[...Array(3)].map((_, i) => (
           <div
             key={i}
-            className="h-16 w-full rounded-lg bg-gray-200 animate-pulse"
+            className="h-14 w-full rounded-xl bg-white/5 animate-pulse"
           />
         ))}
       </div>
@@ -51,15 +46,16 @@ export function ResultsList({
 
   if (results.length === 0) {
     return (
-      <div className="mt-4 text-center text-gray-500">
-        <p className="font-medium">No keywords found.</p>
-        <p className="text-sm">Try a different search.</p>
+      <div className="mt-4">
+        <p className="text-sm text-neutral-500">
+          No keywords found. Try "React Senior" or "Product Designer".
+        </p>
       </div>
     );
   }
 
   return (
-    <div className="mt-4 space-y-3">
+    <div className="mt-4 space-y-2">
       {results.map((suggestion, idx) => (
         <KeywordCard
           key={`${suggestion.label}-${idx}`}

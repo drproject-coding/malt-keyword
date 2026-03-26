@@ -209,7 +209,7 @@ export function ProfileIntelligence({ query }: Props) {
       <div className="min-h-64">
         {activeTab === "overview" && (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div>
+            <div className="min-w-0 overflow-hidden">
               <div className="text-xs text-neutral-500 uppercase tracking-widest mb-4">
                 Day rate distribution
               </div>
@@ -221,7 +221,7 @@ export function ProfileIntelligence({ query }: Props) {
                 </p>
               )}
             </div>
-            <div>
+            <div className="min-w-0">
               <div className="text-xs text-neutral-500 uppercase tracking-widest mb-4">
                 Availability
               </div>

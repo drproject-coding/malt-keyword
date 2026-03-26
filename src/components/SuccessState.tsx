@@ -38,15 +38,13 @@ export function SuccessState({ show, onDismiss }: SuccessStateProps) {
       }`}
     >
       <div
-        className={`bg-green-50 border border-green-200 rounded-lg shadow-lg px-6 py-6 text-center transition-transform duration-300 ${
+        className={`bg-[#111] border border-white/10 rounded-2xl px-8 py-6 text-center transition-transform duration-300 ${
           isVisible ? "scale-100 opacity-100" : "scale-95 opacity-0"
         }`}
       >
-        <p className="text-lg font-semibold text-gray-900 mb-2">
-          ✓ You're in — start searching
-        </p>
-        <p className="text-sm text-gray-600">
-          Your email is confirmed. Results unlocked.
+        <p className="text-lg font-black text-white mb-1">You&apos;re in.</p>
+        <p className="text-sm text-neutral-400">
+          Email confirmed. Results unlocked.
         </p>
       </div>
     </div>

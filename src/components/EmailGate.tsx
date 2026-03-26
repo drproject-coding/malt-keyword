@@ -3,11 +3,11 @@
 import React, { useState } from "react";
 
 export interface EmailGateProps {
-  isGated: boolean; // true when gate should be visible
-  onSubmit: (email: string, name: string, consent: boolean) => Promise<void>; // called when form submitted
-  onUnlock?: () => void; // called when already-subscribed check succeeds
-  isSubmitting?: boolean; // show loading state during submit
-  onResendClick?: () => Promise<void>; // optional: resend email if in "check inbox" state
+  isGated: boolean;
+  onSubmit: (email: string, name: string, consent: boolean) => Promise<void>;
+  onUnlock?: () => void;
+  isSubmitting?: boolean;
+  onResendClick?: () => Promise<void>;
 }
 
 export default function EmailGate({
@@ -95,26 +95,24 @@ export default function EmailGate({
     }
   };
 
+  const inputClass =
+    "w-full px-4 py-3 rounded-xl bg-[#1a1a1a] border border-white/10 text-white placeholder:text-neutral-600 focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-transparent text-sm";
+
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/40 z-50">
-      <div className="w-full max-w-md mx-4 rounded-lg bg-white p-8 shadow-lg">
+    <div className="fixed inset-0 flex items-center justify-center bg-black/70 z-50 px-4">
+      <div className="w-full max-w-md rounded-2xl bg-[#111] border border-white/10 p-8">
         {showLoginMode ? (
-          // Login mode: already subscribed
           <form onSubmit={handleLoginCheck} className="space-y-4">
             <div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                Welcome back
+              <h2 className="text-4xl font-black text-white leading-none tracking-tight">
+                Welcome back.
               </h2>
-              <p className="text-gray-600 text-sm">
+              <p className="text-neutral-400 text-sm mt-3">
                 Enter your verified email to unlock results.
               </p>
             </div>
 
-            {error && (
-              <div className="p-3 rounded-lg bg-red-50 border border-red-200">
-                <p className="text-sm text-red-800">{error}</p>
-              </div>
-            )}
+            {error && <p className="text-sm text-red-400">{error}</p>}
 
             <input
               type="email"
@@ -122,13 +120,13 @@ export default function EmailGate({
               onChange={(e) => setLoginEmail(e.target.value)}
               placeholder="you@example.com"
               required
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              className={inputClass}
             />
 
             <button
               type="submit"
               disabled={!loginEmail || isCheckingEmail}
-              className="w-full px-4 py-2 font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+              className="w-full px-4 py-3 font-semibold text-sm text-black bg-white rounded-full hover:bg-neutral-200 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
             >
               {isCheckingEmail ? "Checking..." : "Unlock"}
             </button>
@@ -139,107 +137,87 @@ export default function EmailGate({
                 setShowLoginMode(false);
                 setError(null);
               }}
-              className="w-full text-sm text-gray-500 hover:text-gray-700"
+              className="w-full text-sm text-neutral-500 hover:text-white transition-colors"
             >
               Back
             </button>
           </form>
         ) : isSubmitted ? (
-          // State B: Check inbox
-          <div className="text-center">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">
-              Check your inbox
+          <div>
+            <h2 className="text-4xl font-black text-white leading-none tracking-tight">
+              Check your inbox.
             </h2>
-            <p className="text-gray-600 mb-6">
-              We've sent a verification link to{" "}
-              <strong className="text-gray-900">{email}</strong>. Click it to
-              unlock full access.
+            <p className="text-neutral-400 text-sm mt-3">
+              We sent a link to <span className="text-white">{email}</span>.
+              Click it to unlock full access.
             </p>
 
             {onResendClick && (
               <button
                 onClick={handleResend}
                 disabled={isResending}
-                className="w-full px-4 py-2 text-sm font-medium text-indigo-600 hover:text-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="mt-6 text-sm text-neutral-500 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
               >
-                {isResending ? "Resending..." : "Didn't receive email? Resend"}
+                {isResending ? "Resending..." : "Didn't get it? Resend"}
               </button>
             )}
           </div>
         ) : (
-          // State A: Email form
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                Unlock full results
+              <h2 className="text-4xl font-black text-white leading-none tracking-tight">
+                Unlock results.
               </h2>
-              <p className="text-gray-600 text-sm">
-                Unlock results (you've used 2 searches)
+              <p className="text-neutral-400 text-sm mt-3">
+                Free. One click to verify.
               </p>
             </div>
 
-            {error && (
-              <div className="p-3 rounded-lg bg-red-50 border border-red-200">
-                <p className="text-sm text-red-800">{error}</p>
-              </div>
-            )}
+            {error && <p className="text-sm text-red-400">{error}</p>}
 
-            {/* Email input */}
-            <div>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@example.com"
-                required
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                aria-label="Email address"
-              />
-            </div>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="you@example.com"
+              required
+              className={inputClass}
+              aria-label="Email address"
+            />
 
-            {/* Name input */}
-            <div>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Your name (optional)"
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                aria-label="Name (optional)"
-              />
-            </div>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Your name (optional)"
+              className={inputClass}
+              aria-label="Name (optional)"
+            />
 
-            {/* Consent checkbox */}
             <div className="flex items-start gap-3">
               <input
                 type="checkbox"
                 id="consent"
                 checked={consent}
                 onChange={(e) => setConsent(e.target.checked)}
-                className="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-2 focus:ring-indigo-500 cursor-pointer"
+                className="mt-1 h-4 w-4 rounded border-white/20 bg-[#1a1a1a] text-white focus:ring-2 focus:ring-white/20 cursor-pointer"
                 aria-label="Consent to receive updates"
               />
               <label
                 htmlFor="consent"
-                className="text-sm text-gray-600 cursor-pointer"
+                className="text-xs text-neutral-500 cursor-pointer leading-relaxed"
               >
-                I agree to receive occasional updates about this tool. Your
-                email will never be sold.
+                I agree to receive occasional updates. Your email will never be
+                sold.
               </label>
             </div>
 
-            {/* Note */}
-            <p className="text-xs text-gray-500">
-              We'll send a confirmation link to your inbox
-            </p>
-
-            {/* Submit button */}
             <button
               type="submit"
               disabled={!email || !consent || isSubmitting}
-              className="w-full px-4 py-2 font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+              className="w-full px-4 py-3 font-semibold text-sm text-black bg-white rounded-full hover:bg-neutral-200 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
             >
-              {isSubmitting ? "Unlocking..." : "Unlock Results"}
+              {isSubmitting ? "Sending..." : "Get Access"}
             </button>
 
             <button
@@ -248,7 +226,7 @@ export default function EmailGate({
                 setShowLoginMode(true);
                 setError(null);
               }}
-              className="w-full text-sm text-gray-500 hover:text-gray-700"
+              className="w-full text-sm text-neutral-500 hover:text-white transition-colors"
             >
               Already subscribed?
             </button>

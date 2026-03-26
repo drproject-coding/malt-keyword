@@ -15,11 +15,11 @@ export function getCompetitionLevel(volume: number): CompetitionLevel {
 
 export function getCompetitionColor(level: CompetitionLevel): string {
   const colors: Record<CompetitionLevel, string> = {
-    rare: "bg-emerald-100 text-emerald-800 border-emerald-200",
-    niche: "bg-indigo-100 text-indigo-800 border-indigo-200",
-    common: "bg-amber-100 text-amber-800 border-amber-200",
-    crowded: "bg-orange-100 text-orange-800 border-orange-200",
-    saturated: "bg-red-100 text-red-800 border-red-200",
+    rare: "bg-emerald-500/10 text-emerald-400",
+    niche: "bg-lime-500/10 text-lime-400",
+    common: "bg-amber-500/10 text-amber-400",
+    crowded: "bg-orange-500/10 text-orange-400",
+    saturated: "bg-red-500/10 text-red-400",
   };
   return colors[level];
 }
@@ -38,7 +38,7 @@ export function getCompetitionLabel(level: CompetitionLevel): string {
 export function getCompetitionDot(level: CompetitionLevel): string {
   const colors: Record<CompetitionLevel, string> = {
     rare: "#10b981",
-    niche: "#6366f1",
+    niche: "#84cc16",
     common: "#f59e0b",
     crowded: "#f97316",
     saturated: "#ef4444",

@@ -54,7 +54,7 @@ export default function Home() {
   const hasQuery = !!query;
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-white to-gray-50">
+    <main className="min-h-screen bg-[#0a0a0a]">
       <SuccessState
         show={showSuccess}
         onDismiss={() => {

@@ -12,11 +12,13 @@ interface LeaderboardProps {
 export function Leaderboard({ items, isLoading }: LeaderboardProps) {
   if (isLoading) {
     return (
-      <div className="max-w-2xl mx-auto bg-gray-100 rounded-lg px-6 lg:px-8 py-6 my-12">
-        <p className="text-sm text-gray-600 mb-6">Popular Keywords on Malt</p>
-        <div className="space-y-3 animate-pulse">
+      <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-6 my-8">
+        <p className="text-xs font-medium tracking-widest uppercase text-neutral-500 mb-4">
+          Popular on Malt
+        </p>
+        <div className="space-y-2 animate-pulse">
           {[...Array(4)].map((_, i) => (
-            <div key={i} className="h-16 bg-gray-200 rounded-lg" />
+            <div key={i} className="h-14 bg-white/5 rounded-xl" />
           ))}
         </div>
       </div>
@@ -24,24 +26,23 @@ export function Leaderboard({ items, isLoading }: LeaderboardProps) {
   }
 
   return (
-    <div className="max-w-2xl mx-auto bg-gray-100 rounded-lg px-6 lg:px-8 py-6 my-12">
-      <p className="text-sm text-gray-600 mb-6">Popular Keywords on Malt</p>
-      <div className="space-y-3">
+    <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-6 my-8">
+      <p className="text-xs font-medium tracking-widest uppercase text-neutral-500 mb-4">
+        Popular on Malt
+      </p>
+      <div className="space-y-2">
         {items.map((item) => (
           <div
             key={item.rank}
-            className="flex items-center gap-4 animate-fade-in"
+            className="flex items-center gap-3 animate-fade-in"
             style={{
               animationDelay: `${item.rank * 100}ms`,
               animationFillMode: "both",
             }}
           >
-            {/* Rank badge */}
-            <div className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-indigo-600 text-white text-xs font-bold shrink-0">
-              #{item.rank}
-            </div>
-
-            {/* Reuse KeywordCard */}
+            <span className="text-xs font-mono text-neutral-600 w-4 shrink-0 text-right">
+              {item.rank}
+            </span>
             <div className="flex-1">
               <KeywordCard suggestion={item.suggestion} />
             </div>

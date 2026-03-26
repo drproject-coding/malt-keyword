@@ -74,11 +74,9 @@ export async function POST(request: NextRequest) {
     await ncbInsert("subscribers", {
       email,
       name: name ?? null,
-      consent: consent ? 1 : 0,
       verified: 0,
       verification_token: token,
       token_created_at: now,
-      subscribed_at: now,
     });
 
     // Send verification email via Resend

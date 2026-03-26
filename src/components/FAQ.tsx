@@ -28,15 +28,20 @@ const FAQ_ITEMS = [
 
 export function FAQ() {
   return (
-    <div className="max-w-2xl mx-auto bg-gray-100 rounded-lg p-6 my-12">
-      <h2 className="text-xl font-semibold text-gray-900 mb-6">Questions?</h2>
-      <div className="space-y-6">
+    <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 my-16">
+      <p className="text-xs font-medium tracking-widest uppercase text-neutral-500 mb-6">
+        Questions
+      </p>
+      <div className="space-y-0">
         {FAQ_ITEMS.map((item, idx) => (
-          <div key={idx} className="border-b border-gray-200 pb-4 last:border-0">
-            <h3 className="text-base font-semibold text-gray-900 mb-2">
+          <div
+            key={idx}
+            className="border-b border-white/10 py-5 last:border-0"
+          >
+            <h3 className="text-sm font-semibold text-white mb-1.5">
               {item.question}
             </h3>
-            <p className="text-sm text-gray-600">{item.answer}</p>
+            <p className="text-sm text-neutral-500">{item.answer}</p>
           </div>
         ))}
       </div>

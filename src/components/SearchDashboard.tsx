@@ -55,14 +55,14 @@ export function SearchDashboard({
 
   return (
     <div className={isGated ? "blur-sm pointer-events-none select-none" : ""}>
-      {/* Verdict header */}
+      {/* Verdict */}
       {verdict && (
-        <div className="mb-5 flex items-start gap-3 px-4 py-3 rounded-xl border border-gray-100 bg-white shadow-sm">
+        <div className="mb-5 flex items-start gap-3 px-4 py-3 rounded-xl bg-white/5 border border-white/5">
           <span
-            className="mt-[3px] w-2.5 h-2.5 rounded-full shrink-0"
+            className="mt-[3px] w-2 h-2 rounded-full shrink-0"
             style={{ backgroundColor: verdict.dot }}
           />
-          <p className="text-sm text-gray-700 leading-relaxed">
+          <p className="text-sm text-neutral-300 leading-relaxed">
             {verdict.text}
           </p>
         </div>
@@ -70,20 +70,20 @@ export function SearchDashboard({
 
       {/* Tab bar */}
       {showTabs && (
-        <div className="flex gap-1 border-b border-gray-100 mb-1">
+        <div className="flex gap-1 border-b border-white/10 mb-1">
           {TABS.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
               className={`px-4 py-2.5 text-sm font-medium transition-colors relative whitespace-nowrap focus:outline-none ${
                 activeTab === tab.id
-                  ? "text-black"
-                  : "text-gray-400 hover:text-gray-700"
+                  ? "text-white"
+                  : "text-neutral-500 hover:text-neutral-300"
               }`}
             >
               {tab.label}
               {activeTab === tab.id && (
-                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-black rounded-full" />
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-white rounded-full" />
               )}
             </button>
           ))}

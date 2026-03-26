@@ -19,16 +19,16 @@ export function KeywordCard({ suggestion }: KeywordCardProps) {
   const label = getCompetitionLabel(level);
 
   return (
-    <div className="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-4 hover:bg-gray-50 transition-colors">
-      <div className="flex-1">
-        <p className="font-medium text-gray-900">{suggestion.label}</p>
-      </div>
-      <div className="flex items-center gap-3 ml-4">
-        <span className="text-sm text-gray-600 whitespace-nowrap">
-          {volume} utilisateurs Malt
+    <div className="flex items-center justify-between gap-4 py-3 px-4 rounded-xl bg-[#111] border border-white/5 hover:bg-[#1a1a1a] transition-colors">
+      <p className="text-sm text-neutral-400 flex-1 truncate">
+        {suggestion.label}
+      </p>
+      <div className="flex items-center gap-3 shrink-0">
+        <span className="text-2xl font-black text-white tabular-nums">
+          {volume.toLocaleString("fr-FR")}
         </span>
         <span
-          className={`inline-block px-3 py-1 rounded-full text-xs font-semibold border ${badgeColor} whitespace-nowrap`}
+          className={`inline-block px-2.5 py-1 rounded-full text-xs font-semibold whitespace-nowrap ${badgeColor}`}
         >
           {label}
         </span>
