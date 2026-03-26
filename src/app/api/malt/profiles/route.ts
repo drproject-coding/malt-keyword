@@ -44,10 +44,7 @@ export async function GET(request: NextRequest) {
 
     if (!response.ok) {
       return NextResponse.json(
-        {
-          error: "No profiles found or upstream unavailable.",
-          _debug: response.status,
-        },
+        { error: "No profiles found or upstream unavailable." },
         { status: 502 },
       );
     }
@@ -57,10 +54,7 @@ export async function GET(request: NextRequest) {
 
     if (!parsed.success || parsed.data.profiles.length === 0) {
       return NextResponse.json(
-        {
-          error: "No profiles found or upstream unavailable.",
-          _debug: !parsed.success ? parsed.error.issues[0] : "empty profiles",
-        },
+        { error: "No profiles found or upstream unavailable." },
         { status: 502 },
       );
     }
@@ -70,13 +64,9 @@ export async function GET(request: NextRequest) {
       { headers: { "Cache-Control": CACHE_CONTROL } },
     );
   } catch (error) {
-    const msg = error instanceof Error ? error.message : String(error);
     console.error("Profiles API error:", error);
     return NextResponse.json(
-      {
-        error: "Profile search temporarily unavailable.",
-        _debug: msg,
-      },
+      { error: "Profile search temporarily unavailable." },
       { status: 500 },
     );
   }
