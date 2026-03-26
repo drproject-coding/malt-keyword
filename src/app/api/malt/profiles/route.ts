@@ -64,9 +64,13 @@ export async function GET(request: NextRequest) {
       { headers: { "Cache-Control": CACHE_CONTROL } },
     );
   } catch (error) {
+    const msg = error instanceof Error ? error.message : String(error);
     console.error("Profiles API error:", error);
     return NextResponse.json(
-      { error: "Profile search temporarily unavailable." },
+      {
+        error: "Profile search temporarily unavailable.",
+        _debug: msg,
+      },
       { status: 500 },
     );
   }
