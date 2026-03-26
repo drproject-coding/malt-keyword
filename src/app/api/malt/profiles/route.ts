@@ -44,7 +44,10 @@ export async function GET(request: NextRequest) {
 
     if (!response.ok) {
       return NextResponse.json(
-        { error: "No profiles found or upstream unavailable." },
+        {
+          error: "No profiles found or upstream unavailable.",
+          _debug: response.status,
+        },
         { status: 502 },
       );
     }
