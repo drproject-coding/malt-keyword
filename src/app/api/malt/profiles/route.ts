@@ -57,7 +57,10 @@ export async function GET(request: NextRequest) {
 
     if (!parsed.success || parsed.data.profiles.length === 0) {
       return NextResponse.json(
-        { error: "No profiles found or upstream unavailable." },
+        {
+          error: "No profiles found or upstream unavailable.",
+          _debug: !parsed.success ? parsed.error.issues[0] : "empty profiles",
+        },
         { status: 502 },
       );
     }

@@ -51,7 +51,7 @@ async def scrape_profiles(q: str, num_pages: int) -> list:
                         timeout=30000,
                     )
                     if response and response.status == 200:
-                        text = await page.evaluate("() => document.body.innerText")
+                        text = await response.text()
                         data = json.loads(text)
                         all_profiles.extend(data.get("profiles", []))
                 except Exception:
