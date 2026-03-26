@@ -4,6 +4,8 @@ import {
   MaltAutocompleteRawSchema,
 } from "@/lib/schemas/malt";
 
+export const dynamic = "force-dynamic";
+
 const MALT_API_URL =
   "https://www.malt.fr/profile/public-api/suggest/tags/autocomplete";
 const UPSTREAM_TIMEOUT = 5000; // 5 seconds

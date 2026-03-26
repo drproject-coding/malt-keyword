@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ncbFind, ncbUpdate } from "@/lib/ncb";
 
+export const dynamic = "force-dynamic";
+
 const TOKEN_EXPIRY_MS = 24 * 60 * 60 * 1000;
 
 function redirect(request: NextRequest, error?: string) {

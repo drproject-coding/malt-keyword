@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
 const states = {
@@ -41,7 +41,7 @@ const states = {
 
 type StateKey = keyof typeof states;
 
-export default function VerifiedPage() {
+function VerifiedContent() {
   const searchParams = useSearchParams();
   const error = searchParams.get("error") as StateKey | null;
   const key = error && error in states ? error : "success";
@@ -54,26 +54,34 @@ export default function VerifiedPage() {
   }, [key]);
 
   return (
+    <div className="max-w-lg w-full space-y-8">
+      <p className="text-sm font-medium tracking-widest uppercase text-neutral-400">
+        Malt Keyword Tool
+      </p>
+      <h1
+        className={`text-7xl sm:text-8xl font-black leading-none tracking-tight ${state.color}`}
+      >
+        {state.headline}
+      </h1>
+      <p className="text-lg text-neutral-500 leading-relaxed max-w-sm">
+        {state.sub}
+      </p>
+      <Link
+        href={state.href}
+        className={`inline-block px-8 py-4 rounded-full font-semibold text-sm transition-colors ${state.accent}`}
+      >
+        {state.cta}
+      </Link>
+    </div>
+  );
+}
+
+export default function VerifiedPage() {
+  return (
     <main className="min-h-screen bg-white flex flex-col items-center justify-center px-6">
-      <div className="max-w-lg w-full space-y-8">
-        <p className="text-sm font-medium tracking-widest uppercase text-neutral-400">
-          Malt Keyword Tool
-        </p>
-        <h1
-          className={`text-7xl sm:text-8xl font-black leading-none tracking-tight ${state.color}`}
-        >
-          {state.headline}
-        </h1>
-        <p className="text-lg text-neutral-500 leading-relaxed max-w-sm">
-          {state.sub}
-        </p>
-        <Link
-          href={state.href}
-          className={`inline-block px-8 py-4 rounded-full font-semibold text-sm transition-colors ${state.accent}`}
-        >
-          {state.cta}
-        </Link>
-      </div>
+      <Suspense>
+        <VerifiedContent />
+      </Suspense>
     </main>
   );
 }

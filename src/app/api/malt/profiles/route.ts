@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { MaltProfilesResponseSchema } from "@/lib/schemas/malt";
 
+export const dynamic = "force-dynamic";
+
 const PROFILES_SERVICE_URL = process.env.PROFILES_SERVICE_URL;
 const PROFILES_SERVICE_SECRET = process.env.PROFILES_SERVICE_SECRET ?? "";
 const PAGES_TO_FETCH = 3;
