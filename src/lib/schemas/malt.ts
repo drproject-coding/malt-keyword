@@ -44,7 +44,7 @@ const MaltProfilePhotoSchema = z.object({
 });
 
 const MaltProfileLocationSchema = z.object({
-  locationType: z.enum(["REMOTE", "ON_SITE", "HYBRID"]).optional(),
+  locationType: z.string().optional(),
   city: z.string().optional(),
   country: z.string().optional(),
   countryCode: z.string().optional(),
