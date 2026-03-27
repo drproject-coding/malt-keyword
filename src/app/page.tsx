@@ -103,9 +103,6 @@ export default function Home() {
               items={leaderboardItems}
               isLoading={leaderboardIsLoading}
             />
-            <div className="px-4 sm:px-6 lg:px-8 mb-8 flex justify-center">
-              <CTAButton searchInputRef={searchInputRef} />
-            </div>
           </>
         )}
 
