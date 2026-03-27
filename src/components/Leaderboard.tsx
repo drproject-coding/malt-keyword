@@ -18,7 +18,7 @@ export function Leaderboard({ items, isLoading }: LeaderboardProps) {
         </p>
         <div className="space-y-2 animate-pulse">
           {[...Array(4)].map((_, i) => (
-            <div key={i} className="h-14 bg-white/5 rounded-xl" />
+            <div key={i} className="h-16 bg-white/5 rounded-xl" />
           ))}
         </div>
       </div>
