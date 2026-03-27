@@ -20,7 +20,7 @@ export function KeywordCard({ suggestion }: KeywordCardProps) {
 
   return (
     <div className="flex items-center justify-between gap-4 py-4 px-4 rounded-xl bg-[#111] border border-white/5 hover:bg-[#1a1a1a] transition-colors">
-      <p className="text-xs text-neutral-500 uppercase tracking-wide flex-1 truncate">
+      <p className="text-xs text-neutral-400 uppercase tracking-wide flex-1 truncate">
         {suggestion.label}
       </p>
       <div className="flex items-center gap-3 shrink-0">

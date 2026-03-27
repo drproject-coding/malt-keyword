@@ -6,10 +6,10 @@ export type CompetitionLevel =
   | "saturated";
 
 export function getCompetitionLevel(volume: number): CompetitionLevel {
-  if (volume < 500) return "rare";
-  if (volume < 3_000) return "niche";
-  if (volume < 10_000) return "common";
-  if (volume < 30_000) return "crowded";
+  if (volume < 50) return "rare";
+  if (volume < 500) return "niche";
+  if (volume < 2_000) return "common";
+  if (volume < 10_000) return "crowded";
   return "saturated";
 }
 
