@@ -57,10 +57,13 @@ export function ResultsList({
   return (
     <div className="mt-4 space-y-2">
       {results.map((suggestion, idx) => (
-        <KeywordCard
+        <div
           key={`${suggestion.label}-${idx}`}
-          suggestion={suggestion}
-        />
+          className="animate-card-in"
+          style={{ animationDelay: `${idx * 60}ms`, animationFillMode: "both" }}
+        >
+          <KeywordCard suggestion={suggestion} />
+        </div>
       ))}
     </div>
   );

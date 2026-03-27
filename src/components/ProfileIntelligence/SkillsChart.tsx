@@ -24,7 +24,6 @@ export function SkillsChart({ skills, sampleSize }: Props) {
     <div>
       <p className="text-xs text-neutral-500 mb-4">
         Skills most frequently listed by the {sampleSize} profiles analyzed.
-        Wider bar = more profiles include this skill.
       </p>
 
       <div className="space-y-2">
@@ -59,7 +58,9 @@ export function SkillsChart({ skills, sampleSize }: Props) {
 
               {/* Certified badge */}
               {skill.certifiedCount > 0 && (
-                <div className="text-xs text-amber-400 shrink-0">✓ cert</div>
+                <div className="text-xs text-amber-400 shrink-0">
+                  ✓ certified
+                </div>
               )}
             </div>
           );

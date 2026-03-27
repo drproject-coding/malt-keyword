@@ -40,7 +40,7 @@ export function Leaderboard({ items, isLoading }: LeaderboardProps) {
               animationFillMode: "both",
             }}
           >
-            <span className="text-xs font-mono text-neutral-500 w-4 shrink-0 text-right">
+            <span className="text-xs tabular-nums text-neutral-500 w-4 shrink-0 text-right">
               {item.rank}
             </span>
             <div className="flex-1">

@@ -66,12 +66,12 @@ export default function EmailGate({
     setError(null);
 
     if (!email) {
-      setError("Please provide an email address");
+      setError("Email address required.");
       return;
     }
 
     if (!consent) {
-      setError("You must consent to receive updates");
+      setError("Check the box to continue.");
       return;
     }
 
@@ -215,7 +215,7 @@ export default function EmailGate({
                 Unlock results.
               </h2>
               <p className="text-neutral-400 text-sm mt-3">
-                Free. One click to verify.
+                Free. Verify your email to unlock.
               </p>
             </div>
 

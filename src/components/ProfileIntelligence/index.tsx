@@ -22,7 +22,7 @@ const TABS: { id: Tab; label: string }[] = [
   { id: "experience", label: "Experience" },
 ];
 
-type FilterLocationType = "all" | "REMOTE" | "ON_SITE" | "HYBRID";
+type FilterLocationType = "all" | "REMOTE";
 
 interface Filters {
   locationType: FilterLocationType;
@@ -103,7 +103,7 @@ export function ProfileIntelligence({ query }: Props) {
       <div className="bg-neutral-950 border border-neutral-800 rounded-xl p-8 space-y-3">
         <p className="text-sm text-neutral-400">
           {isBlocked
-            ? "Malt's profile API is protected — direct server access is blocked."
+            ? "Profile data isn't available server-side. Browse profiles directly on Malt."
             : "Profile data temporarily unavailable."}
         </p>
         {isBlocked && (
@@ -133,25 +133,19 @@ export function ProfileIntelligence({ query }: Props) {
           Filter
         </span>
 
-        {(["all", "REMOTE", "ON_SITE", "HYBRID"] as FilterLocationType[]).map(
-          (loc) => (
-            <button
-              key={loc}
-              onClick={() => setFilters((f) => ({ ...f, locationType: loc }))}
-              className={`px-3 py-1 text-xs rounded-full border transition-colors ${
-                filters.locationType === loc
-                  ? "border-white text-white bg-white/10"
-                  : "border-neutral-700 text-neutral-500 hover:border-neutral-500"
-              }`}
-            >
-              {loc === "all"
-                ? "All"
-                : loc === "ON_SITE"
-                  ? "On-site"
-                  : loc.charAt(0) + loc.slice(1).toLowerCase()}
-            </button>
-          ),
-        )}
+        {(["all", "REMOTE"] as FilterLocationType[]).map((loc) => (
+          <button
+            key={loc}
+            onClick={() => setFilters((f) => ({ ...f, locationType: loc }))}
+            className={`px-3 py-1 text-xs rounded-full border transition-colors ${
+              filters.locationType === loc
+                ? "border-white text-white bg-white/10"
+                : "border-neutral-700 text-neutral-500 hover:border-neutral-500"
+            }`}
+          >
+            {loc === "all" ? "All" : "Remote"}
+          </button>
+        ))}
 
         <button
           onClick={() =>

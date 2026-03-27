@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { flushSync } from "react-dom";
 import { useSearch } from "@/hooks/useSearch";
 import { useLeaderboard } from "@/hooks/useLeaderboard";
 import { Hero } from "@/components/Hero";
@@ -53,6 +54,24 @@ export default function Home() {
 
   const hasQuery = !!query;
 
+  const handleQueryChange = useCallback(
+    (newQuery: string) => {
+      const willCross = !!query !== !!newQuery;
+      if (
+        willCross &&
+        typeof document !== "undefined" &&
+        "startViewTransition" in document
+      ) {
+        document.startViewTransition(() => {
+          flushSync(() => setQuery(newQuery));
+        });
+      } else {
+        setQuery(newQuery);
+      }
+    },
+    [query, setQuery],
+  );
+
   return (
     <main id="main-content" className="min-h-screen bg-[#0a0a0a]">
       <SuccessState
@@ -67,14 +86,19 @@ export default function Home() {
       <div className="mx-auto max-w-2xl">
         {/* Hero block: compact brand header during search, full hero pre-search */}
         {hasQuery ? (
-          <div className="px-4 sm:px-6 mb-6 pt-8">
+          <div
+            className="px-4 sm:px-6 mb-6 pt-8"
+            style={{ viewTransitionName: "page-header" }}
+          >
             <p className="text-xs font-medium tracking-widest uppercase text-neutral-500">
               Malt Keyword Intel
             </p>
           </div>
         ) : (
           <>
-            <Hero searchInputRef={searchInputRef} />
+            <div style={{ viewTransitionName: "page-header" }}>
+              <Hero searchInputRef={searchInputRef} />
+            </div>
             <Leaderboard
               items={leaderboardItems}
               isLoading={leaderboardIsLoading}
@@ -86,8 +110,15 @@ export default function Home() {
         )}
 
         {/* Search input — always visible */}
-        <div className="px-4 sm:px-6 lg:px-8">
-          <SearchInput ref={searchInputRef} value={query} onChange={setQuery} />
+        <div
+          className="px-4 sm:px-6 lg:px-8"
+          style={{ viewTransitionName: "search-box" }}
+        >
+          <SearchInput
+            ref={searchInputRef}
+            value={query}
+            onChange={handleQueryChange}
+          />
         </div>
 
         {/* Post-search dashboard */}

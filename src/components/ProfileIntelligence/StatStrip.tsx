@@ -99,23 +99,25 @@ export function StatStrip({ data, query }: Props) {
       {/* Key numbers */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
         <div>
-          <div className="text-3xl font-black text-white">
+          <div className="text-3xl font-black text-white tabular-nums">
             {rate ? `${rate.median} ${rate.currency}` : "—"}
           </div>
           <div className="text-xs text-neutral-500 mt-1">median day rate</div>
         </div>
         <div>
-          <div className="text-3xl font-black text-white">{availablePct}%</div>
+          <div className="text-3xl font-black text-white tabular-nums">
+            {availablePct}%
+          </div>
           <div className="text-xs text-neutral-500 mt-1">available now</div>
         </div>
         <div>
-          <div className="text-3xl font-black text-white">
+          <div className="text-3xl font-black text-white tabular-nums">
             {experience.avgMissions}
           </div>
           <div className="text-xs text-neutral-500 mt-1">avg missions</div>
         </div>
         <div>
-          <div className="text-3xl font-black text-white">
+          <div className="text-3xl font-black text-white tabular-nums">
             {experience.superMalterPct}%
           </div>
           <div className="text-xs text-neutral-500 mt-1">Super Malter</div>
@@ -140,7 +142,7 @@ export function StatStrip({ data, query }: Props) {
           title="Rate ceiling"
           verdict={verdicts.rateCeiling}
           colorMap={opportunityColors}
-          subtitle="Based on p75 day rate"
+          subtitle="Based on 75th percentile day rate"
         />
       </div>
     </div>

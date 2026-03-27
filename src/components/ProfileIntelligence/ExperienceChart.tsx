@@ -48,7 +48,7 @@ export function ExperienceChart({ experience, sampleSize }: Props) {
           <div className="text-xs text-neutral-500 uppercase tracking-widest mb-1">
             Avg missions
           </div>
-          <div className="text-3xl font-black text-white">
+          <div className="text-3xl font-black text-white tabular-nums">
             {experience.avgMissions}
           </div>
         </div>
@@ -56,15 +56,15 @@ export function ExperienceChart({ experience, sampleSize }: Props) {
           <div className="text-xs text-neutral-500 uppercase tracking-widest mb-1">
             Median missions
           </div>
-          <div className="text-3xl font-black text-white">
+          <div className="text-3xl font-black text-white tabular-nums">
             {experience.medianMissions}
           </div>
         </div>
         <div>
           <div className="text-xs text-neutral-500 uppercase tracking-widest mb-1">
-            Avg recs
+            Avg reviews
           </div>
-          <div className="text-3xl font-black text-white">
+          <div className="text-3xl font-black text-white tabular-nums">
             {experience.avgRecommendations}
           </div>
         </div>
@@ -72,7 +72,7 @@ export function ExperienceChart({ experience, sampleSize }: Props) {
           <div className="text-xs text-neutral-500 uppercase tracking-widest mb-1">
             Avg rating
           </div>
-          <div className="text-3xl font-black text-white">
+          <div className="text-3xl font-black text-white tabular-nums">
             {experience.avgRating > 0 ? `${experience.avgRating}/5` : "—"}
           </div>
         </div>
@@ -133,7 +133,7 @@ export function ExperienceChart({ experience, sampleSize }: Props) {
             ? "Veteran-dominated — strong social proof required to compete."
             : experience.superMalterPct > 30
               ? "Mixed field — strong profile can stand out."
-              : "Accessible — Super Malter badge is not the norm here."}
+              : "Accessible — newcomers can compete."}
         </p>
 
         {/* Badge breakdown */}
@@ -144,10 +144,10 @@ export function ExperienceChart({ experience, sampleSize }: Props) {
                 <span className="text-xs text-neutral-400 flex-1">
                   {BADGE_LABELS[level] ?? level}
                 </span>
-                <span className="text-xs font-mono text-neutral-300">
+                <span className="text-xs tabular-nums text-neutral-300">
                   {count} / {sampleSize} profiles
                 </span>
-                <span className="text-xs font-mono text-neutral-500 w-10 text-right">
+                <span className="text-xs tabular-nums text-neutral-500 w-10 text-right">
                   {Math.round((count / sampleSize) * 100)}%
                 </span>
               </div>
