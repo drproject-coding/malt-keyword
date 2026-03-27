@@ -34,6 +34,45 @@ export async function GET(request: NextRequest) {
     url.searchParams.set("q", q);
     url.searchParams.set("pages", String(pages));
 
+    // Forward optional filter params
+    const stringParams = [
+      "exp",
+      "category",
+      "badge",
+      "lang",
+      "city",
+      "location",
+      "countryCode",
+      "administrativeAreaLevel1Code",
+      "administrativeAreaLevel2Code",
+      "businessSector",
+    ];
+    for (const key of stringParams) {
+      const val = searchParams.get(key);
+      if (val) url.searchParams.set(key, val);
+    }
+
+    // Numeric params
+    const lat = searchParams.get("lat");
+    const lon = searchParams.get("lon");
+    const minPrice = searchParams.get("minPrice");
+    const maxPrice = searchParams.get("maxPrice");
+    if (lat) url.searchParams.set("lat", lat);
+    if (lon) url.searchParams.set("lon", lon);
+    if (minPrice) url.searchParams.set("minPrice", minPrice);
+    if (maxPrice) url.searchParams.set("maxPrice", maxPrice);
+
+    // Boolean params
+    if (searchParams.get("remoteEuropa") === "true")
+      url.searchParams.set("remoteEuropa", "true");
+    if (searchParams.get("fallback") === "true")
+      url.searchParams.set("fallback", "true");
+
+    // Multi-value: excludedProfiles
+    for (const id of searchParams.getAll("excludedProfiles")) {
+      url.searchParams.append("excludedProfiles", id);
+    }
+
     const response = await fetch(url.toString(), {
       headers: {
         "x-api-secret": PROFILES_SERVICE_SECRET,
