@@ -129,7 +129,7 @@ export function ProfileIntelligence({ query }: Props) {
 
       {/* Filters */}
       <div className="flex flex-wrap items-center gap-3 mb-6">
-        <span className="text-xs text-neutral-600 uppercase tracking-widest">
+        <span className="text-xs text-neutral-500 uppercase tracking-widest">
           Filter
         </span>
 
@@ -183,17 +183,25 @@ export function ProfileIntelligence({ query }: Props) {
         </div>
 
         {filtered.length !== profiles.length && (
-          <span className="text-xs text-neutral-600">
+          <span className="text-xs text-neutral-500">
             {filtered.length} / {profiles.length} profiles
           </span>
         )}
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 border-b border-neutral-800 mb-6">
+      <div
+        role="tablist"
+        aria-label="Profile analytics"
+        className="flex gap-1 border-b border-neutral-800 mb-6"
+      >
         {TABS.map((tab) => (
           <button
             key={tab.id}
+            role="tab"
+            id={`tab-${tab.id}`}
+            aria-selected={activeTab === tab.id}
+            aria-controls={`panel-${tab.id}`}
             onClick={() => setActiveTab(tab.id)}
             className={`px-4 py-2 text-sm font-medium transition-colors relative ${
               activeTab === tab.id
@@ -210,7 +218,12 @@ export function ProfileIntelligence({ query }: Props) {
       </div>
 
       {/* Tab content */}
-      <div className="min-h-64">
+      <div
+        role="tabpanel"
+        id={`panel-${activeTab}`}
+        aria-labelledby={`tab-${activeTab}`}
+        className="min-h-64"
+      >
         {activeTab === "overview" && (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div className="min-w-0 overflow-hidden">
@@ -220,7 +233,7 @@ export function ProfileIntelligence({ query }: Props) {
               {data.rate ? (
                 <RateChart rate={data.rate} />
               ) : (
-                <p className="text-sm text-neutral-600">
+                <p className="text-sm text-neutral-500">
                   No rate data available for this filter.
                 </p>
               )}

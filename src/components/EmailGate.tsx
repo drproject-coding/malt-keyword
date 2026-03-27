@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 export interface EmailGateProps {
   isGated: boolean;
@@ -26,6 +26,36 @@ export default function EmailGate({
   const [showLoginMode, setShowLoginMode] = useState(false);
   const [loginEmail, setLoginEmail] = useState("");
   const [isCheckingEmail, setIsCheckingEmail] = useState(false);
+  const dialogRef = useRef<HTMLDivElement>(null);
+
+  // Focus trap: focus first focusable element and cycle Tab within dialog
+  useEffect(() => {
+    if (!isGated) return;
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+
+    const firstFocusable = dialog.querySelector<HTMLElement>("input, button");
+    firstFocusable?.focus();
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== "Tab") return;
+      const focusable = Array.from(
+        dialog.querySelectorAll<HTMLElement>("input, button"),
+      );
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last?.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first?.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isGated, showLoginMode, isSubmitted]);
 
   if (!isGated) {
     return null;
@@ -100,11 +130,20 @@ export default function EmailGate({
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/70 z-50 px-4">
-      <div className="w-full max-w-md rounded-2xl bg-[#111] border border-white/10 p-8">
+      <div
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="dialog-title"
+        className="w-full max-w-md rounded-2xl bg-[#111] border border-white/10 p-8"
+      >
         {showLoginMode ? (
           <form onSubmit={handleLoginCheck} className="space-y-4">
             <div>
-              <h2 className="text-4xl font-black text-white leading-none tracking-tight">
+              <h2
+                id="dialog-title"
+                className="text-4xl font-black text-white leading-none tracking-tight"
+              >
                 Welcome back.
               </h2>
               <p className="text-neutral-400 text-sm mt-3">
@@ -120,6 +159,7 @@ export default function EmailGate({
               onChange={(e) => setLoginEmail(e.target.value)}
               placeholder="you@example.com"
               required
+              aria-label="Email address"
               className={inputClass}
             />
 
@@ -144,7 +184,10 @@ export default function EmailGate({
           </form>
         ) : isSubmitted ? (
           <div>
-            <h2 className="text-4xl font-black text-white leading-none tracking-tight">
+            <h2
+              id="dialog-title"
+              className="text-4xl font-black text-white leading-none tracking-tight"
+            >
               Check your inbox.
             </h2>
             <p className="text-neutral-400 text-sm mt-3">
@@ -165,7 +208,10 @@ export default function EmailGate({
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <h2 className="text-4xl font-black text-white leading-none tracking-tight">
+              <h2
+                id="dialog-title"
+                className="text-4xl font-black text-white leading-none tracking-tight"
+              >
                 Unlock results.
               </h2>
               <p className="text-neutral-400 text-sm mt-3">
@@ -201,7 +247,6 @@ export default function EmailGate({
                 checked={consent}
                 onChange={(e) => setConsent(e.target.checked)}
                 className="mt-1 h-4 w-4 rounded border-white/20 bg-[#1a1a1a] text-white focus:ring-2 focus:ring-white/20 cursor-pointer"
-                aria-label="Consent to receive updates"
               />
               <label
                 htmlFor="consent"

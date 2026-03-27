@@ -128,7 +128,7 @@ export function ExperienceChart({ experience, sampleSize }: Props) {
           />
         </div>
 
-        <p className="text-xs text-neutral-600 mb-4">
+        <p className="text-xs text-neutral-500 mb-4">
           {experience.superMalterPct > 60
             ? "Veteran-dominated — strong social proof required to compete."
             : experience.superMalterPct > 30

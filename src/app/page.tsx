@@ -54,7 +54,7 @@ export default function Home() {
   const hasQuery = !!query;
 
   return (
-    <main className="min-h-screen bg-[#0a0a0a]">
+    <main id="main-content" className="min-h-screen bg-[#0a0a0a]">
       <SuccessState
         show={showSuccess}
         onDismiss={() => {
@@ -68,13 +68,13 @@ export default function Home() {
         {/* Hero block: compact brand header during search, full hero pre-search */}
         {hasQuery ? (
           <div className="px-4 sm:px-6 mb-6 pt-8">
-            <p className="text-xs font-medium tracking-widest uppercase text-neutral-600">
+            <p className="text-xs font-medium tracking-widest uppercase text-neutral-500">
               Malt Keyword Intel
             </p>
           </div>
         ) : (
           <>
-            <Hero />
+            <Hero searchInputRef={searchInputRef} />
             <Leaderboard
               items={leaderboardItems}
               isLoading={leaderboardIsLoading}

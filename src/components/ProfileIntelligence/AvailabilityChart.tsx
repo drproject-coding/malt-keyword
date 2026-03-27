@@ -80,12 +80,12 @@ export function AvailabilityChart({ availability }: Props) {
                 <span className="text-sm font-semibold text-neutral-200">
                   {s.label}
                 </span>
-                <span className="text-xs text-neutral-600">{s.sublabel}</span>
+                <span className="text-xs text-neutral-500">{s.sublabel}</span>
               </div>
             </div>
             <div className="text-right shrink-0">
               <div className="text-xl font-black text-white">{s.pct}%</div>
-              <div className="text-xs text-neutral-600">{s.count} profiles</div>
+              <div className="text-xs text-neutral-500">{s.count} profiles</div>
             </div>
           </div>
         ))}

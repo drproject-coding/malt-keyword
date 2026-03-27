@@ -100,7 +100,7 @@ export function RateChart({ rate }: Props) {
         </BarChart>
       </ResponsiveContainer>
 
-      <p className="text-xs text-neutral-600 mt-3">
+      <p className="text-xs text-neutral-500 mt-3">
         Day rates in {rate.currency}. Only profiles with visible pricing
         included.
       </p>

@@ -68,7 +68,7 @@ function VerdictCard({
           {verdict.label}
         </span>
       </div>
-      <span className="text-xs text-neutral-600">{subtitle}</span>
+      <span className="text-xs text-neutral-400">{subtitle}</span>
     </div>
   );
 }

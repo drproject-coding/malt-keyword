@@ -79,7 +79,7 @@ export function SaturationGauge({ results }: Props) {
                 <path
                   d={arcPath(0, 180, r, cx, cy, 16)}
                   fill="none"
-                  stroke="#f3f4f6"
+                  stroke="#262626"
                   strokeWidth={16}
                   strokeLinecap="round"
                 />
@@ -111,7 +111,7 @@ export function SaturationGauge({ results }: Props) {
                 {[0, 45, 90, 135, 180].map((deg) => {
                   const p = polarToXY(deg, r + 14, cx, cy);
                   return (
-                    <circle key={deg} cx={p.x} cy={p.y} r={2} fill="#d1d5db" />
+                    <circle key={deg} cx={p.x} cy={p.y} r={2} fill="#404040" />
                   );
                 })}
               </svg>
@@ -120,7 +120,7 @@ export function SaturationGauge({ results }: Props) {
               <p className="text-sm font-medium text-neutral-400 uppercase tracking-widest mb-1">
                 {item.label}
               </p>
-              <p className="text-5xl font-black text-black tabular-nums">
+              <p className="text-5xl font-black text-white tabular-nums">
                 {occ.toLocaleString("fr-FR")}
               </p>
               <p className="text-sm text-neutral-500 mt-1">freelancers Malt</p>

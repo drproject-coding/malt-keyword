@@ -68,7 +68,7 @@ export function Constellation({ results, query }: Props) {
             cy={CY}
             r={r}
             fill="none"
-            stroke="#f3f4f6"
+            stroke="rgba(255,255,255,0.08)"
             strokeWidth={1}
             strokeDasharray="4 4"
           />
@@ -82,13 +82,20 @@ export function Constellation({ results, query }: Props) {
             y1={CY}
             x2={node.x}
             y2={node.y}
-            stroke="#e5e7eb"
+            stroke="rgba(255,255,255,0.05)"
             strokeWidth={1}
           />
         ))}
 
         {/* Center node — the query */}
-        <circle cx={CX} cy={CY} r={18} fill="#111827" />
+        <circle
+          cx={CX}
+          cy={CY}
+          r={18}
+          fill="#2a2a2a"
+          stroke="rgba(255,255,255,0.12)"
+          strokeWidth={1.5}
+        />
         <text
           x={CX}
           y={CY}
@@ -128,7 +135,7 @@ export function Constellation({ results, query }: Props) {
                 textAnchor={anchor}
                 dominantBaseline="middle"
                 fontSize={9}
-                fill="#374151"
+                fill="#a3a3a3"
               >
                 {node.label.length > 18
                   ? node.label.slice(0, 16) + "…"

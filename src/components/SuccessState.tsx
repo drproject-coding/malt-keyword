@@ -31,7 +31,7 @@ export function SuccessState({ show, onDismiss }: SuccessStateProps) {
 
   return (
     <div
-      className={`fixed inset-0 flex items-center justify-center transition-all duration-300 ${
+      className={`fixed inset-0 flex items-center justify-center transition-opacity duration-300 ${
         isVisible
           ? "bg-black/20 opacity-100"
           : "bg-black/20 opacity-0 pointer-events-none"

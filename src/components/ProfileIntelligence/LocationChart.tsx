@@ -27,7 +27,7 @@ function Segment({
       />
       <span className="text-sm text-neutral-300 flex-1">{label}</span>
       <span className="text-2xl font-black text-white">{pct}%</span>
-      <span className="text-xs text-neutral-600 w-16 text-right">
+      <span className="text-xs text-neutral-500 w-16 text-right">
         {count} profiles
       </span>
     </div>
@@ -81,7 +81,7 @@ export function LocationChart({ location, total }: Props) {
                 className="flex items-center gap-1.5 bg-neutral-900 border border-neutral-800 px-2.5 py-1 rounded-full"
               >
                 <span className="text-xs text-neutral-200">{city}</span>
-                <span className="text-xs text-neutral-600">{count}</span>
+                <span className="text-xs text-neutral-500">{count}</span>
               </div>
             ))}
           </div>

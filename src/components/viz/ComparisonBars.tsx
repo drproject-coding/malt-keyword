@@ -36,14 +36,14 @@ export function ComparisonBars({ results }: Props) {
         return (
           <div key={item.label}>
             <div className="flex items-center justify-between mb-1">
-              <span className="text-sm font-medium text-gray-800">
+              <span className="text-sm font-medium text-neutral-300">
                 {item.label}
               </span>
-              <span className="text-sm tabular-nums text-gray-500">
+              <span className="text-sm tabular-nums text-neutral-500">
                 {occ.toLocaleString("fr-FR")}
               </span>
             </div>
-            <div className="h-6 w-full rounded-full bg-gray-100 overflow-hidden">
+            <div className="h-6 w-full rounded-full bg-white/10 overflow-hidden">
               <div
                 className="h-full rounded-full transition-all duration-700 ease-out"
                 style={{
