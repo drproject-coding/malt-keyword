@@ -31,6 +31,8 @@ def build_malt_url(q: str, page: int, filters: dict, search_id: Optional[str]) -
         if filters.get(key) is not None:
             params[key] = str(filters[key])
 
+    if filters.get("remoteAllowed"):
+        params["remoteAllowed"] = "true"
     if filters.get("remoteEuropa"):
         params["remoteEuropa"] = "true"
     if filters.get("fallback"):
@@ -129,6 +131,8 @@ async def profiles(
     maxPrice: Optional[int] = Query(default=None),
     # Business sector e.g. sports, finance, health
     businessSector: Optional[str] = Query(default=None),
+    # Remote France flag (no lat/lon needed — use location="Télétravail (France)")
+    remoteAllowed: Optional[bool] = Query(default=None),
     # Remote Europa flag
     remoteEuropa: Optional[bool] = Query(default=None),
     # Fallback flag (used internally by Malt pagination)
@@ -154,6 +158,7 @@ async def profiles(
         "minPrice": minPrice,
         "maxPrice": maxPrice,
         "businessSector": businessSector,
+        "remoteAllowed": remoteAllowed,
         "remoteEuropa": remoteEuropa,
         "fallback": fallback,
         "excludedProfiles": excludedProfiles,

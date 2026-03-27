@@ -62,6 +62,8 @@ export async function GET(request: NextRequest) {
     if (maxPrice) url.searchParams.set("maxPrice", maxPrice);
 
     // Boolean params
+    if (searchParams.get("remoteAllowed") === "true")
+      url.searchParams.set("remoteAllowed", "true");
     if (searchParams.get("remoteEuropa") === "true")
       url.searchParams.set("remoteEuropa", "true");
     if (searchParams.get("fallback") === "true")
