@@ -40,20 +40,9 @@ function CustomDot(props: any) {
   const { cx, cy, payload } = props;
   const color = getQuadrantColor(payload.x, payload.y);
   return (
-    <g>
-      <circle cx={cx} cy={cy} r={8} fill={color} opacity={0.85} />
-      <text
-        x={cx}
-        y={cy - 12}
-        textAnchor="middle"
-        fontSize={10}
-        fill="#a3a3a3"
-        className="pointer-events-none"
-      >
-        {payload.label.length > 16
-          ? payload.label.slice(0, 14) + "…"
-          : payload.label}
-      </text>
+    <g style={{ cursor: "pointer" }}>
+      <circle cx={cx} cy={cy} r={10} fill={color} opacity={0.12} />
+      <circle cx={cx} cy={cy} r={6} fill={color} opacity={0.9} />
     </g>
   );
 }
@@ -109,7 +98,10 @@ export function OpportunityMatrix({ results }: Props) {
           Saturated — avoid
         </span>
       </div>
-      <ResponsiveContainer width="100%" height={420}>
+      <p className="text-xs text-neutral-600 mb-3">
+        Hover a dot to see keyword details
+      </p>
+      <ResponsiveContainer width="100%" height={380}>
         <ScatterChart margin={{ top: 20, right: 20, bottom: 40, left: 40 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#262626" />
           <XAxis
