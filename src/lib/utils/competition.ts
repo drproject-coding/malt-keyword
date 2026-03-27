@@ -35,6 +35,17 @@ export function getCompetitionLabel(level: CompetitionLevel): string {
   return labels[level];
 }
 
+export function getCompetitionTextColor(level: CompetitionLevel): string {
+  const colors: Record<CompetitionLevel, string> = {
+    rare: "text-emerald-400",
+    niche: "text-lime-400",
+    common: "text-amber-400",
+    crowded: "text-orange-400",
+    saturated: "text-red-400",
+  };
+  return colors[level];
+}
+
 export function getCompetitionDot(level: CompetitionLevel): string {
   const colors: Record<CompetitionLevel, string> = {
     rare: "#10b981",

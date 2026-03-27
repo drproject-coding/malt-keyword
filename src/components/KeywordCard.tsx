@@ -5,6 +5,7 @@ import {
   getCompetitionLevel,
   getCompetitionColor,
   getCompetitionLabel,
+  getCompetitionTextColor,
 } from "@/lib/utils/competition";
 import type { MaltSuggestion } from "@/lib/schemas/malt";
 
@@ -46,6 +47,7 @@ export function KeywordCard({ suggestion }: KeywordCardProps) {
   const level = getCompetitionLevel(volume);
   const badgeColor = getCompetitionColor(level);
   const label = getCompetitionLabel(level);
+  const textColor = getCompetitionTextColor(level);
   const animatedVolume = useCountUp(volume);
 
   return (
@@ -54,7 +56,9 @@ export function KeywordCard({ suggestion }: KeywordCardProps) {
         {suggestion.label}
       </p>
       <div className="flex items-center gap-3 shrink-0">
-        <span className="text-4xl font-black text-white tabular-nums leading-none">
+        <span
+          className={`text-4xl font-black tabular-nums leading-none ${textColor}`}
+        >
           {animatedVolume.toLocaleString("fr-FR")}
         </span>
         <span

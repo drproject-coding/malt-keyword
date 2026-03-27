@@ -57,7 +57,10 @@ export function SearchDashboard({
     <div className={isGated ? "blur-sm pointer-events-none select-none" : ""}>
       {/* Verdict */}
       {verdict && (
-        <div className="mb-5 flex items-start gap-3.5 px-5 py-4 rounded-xl bg-white/5 border border-white/[0.08]">
+        <div
+          className="mb-5 flex items-start gap-3.5 px-5 py-4 rounded-xl bg-white/5 border border-white/[0.08]"
+          style={{ borderLeftColor: verdict.dot, borderLeftWidth: "3px" }}
+        >
           <span
             className="mt-[5px] w-2.5 h-2.5 rounded-full shrink-0"
             style={{ backgroundColor: verdict.dot }}
