@@ -34,9 +34,8 @@ export async function GET(request: NextRequest) {
     url.searchParams.set("q", q);
     url.searchParams.set("pages", String(pages));
 
-    // Forward optional filter params
+    // Forward optional single-value filter params
     const stringParams = [
-      "exp",
       "category",
       "badge",
       "lang",
@@ -67,6 +66,11 @@ export async function GET(request: NextRequest) {
       url.searchParams.set("remoteEuropa", "true");
     if (searchParams.get("fallback") === "true")
       url.searchParams.set("fallback", "true");
+
+    // Multi-value: exp (ENTRY, INTERMEDIATE, EXPERT, EXPERT_PLUS)
+    for (const level of searchParams.getAll("exp")) {
+      url.searchParams.append("exp", level);
+    }
 
     // Multi-value: excludedProfiles
     for (const id of searchParams.getAll("excludedProfiles")) {

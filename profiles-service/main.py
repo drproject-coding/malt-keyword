@@ -22,7 +22,7 @@ def build_malt_url(q: str, page: int, filters: dict, search_id: Optional[str]) -
     params = {"q": q, "page": str(page)}
 
     optional_keys = [
-        "exp", "category", "badge", "lang",
+        "category", "badge", "lang",
         "lat", "lon", "city", "location", "countryCode",
         "administrativeAreaLevel1Code", "administrativeAreaLevel2Code",
         "minPrice", "maxPrice", "businessSector",
@@ -39,8 +39,10 @@ def build_malt_url(q: str, page: int, filters: dict, search_id: Optional[str]) -
     if search_id:
         params["searchid"] = search_id
 
-    # Multi-value param: excludedProfiles
+    # Multi-value params: exp, excludedProfiles
     multi_params = []
+    for level in filters.get("exp") or []:
+        multi_params.append(("exp", level))
     for pid in filters.get("excludedProfiles") or []:
         multi_params.append(("excludedProfiles", pid))
 
@@ -106,8 +108,8 @@ async def scrape_profiles(q: str, num_pages: int, filters: dict) -> list:
 async def profiles(
     q: str = Query(..., min_length=2),
     pages: int = Query(default=3, ge=1, le=PAGES_MAX),
-    # Experience level: ENTRY, INTERMEDIATE, SENIOR, EXPERT
-    exp: Optional[str] = Query(default=None),
+    # Experience level (multi-value): ENTRY, INTERMEDIATE, EXPERT, EXPERT_PLUS
+    exp: Optional[List[str]] = Query(default=None),
     # Job category e.g. mobile_developer, web_developer
     category: Optional[str] = Query(default=None),
     # Badge: SUPER_MALTER
